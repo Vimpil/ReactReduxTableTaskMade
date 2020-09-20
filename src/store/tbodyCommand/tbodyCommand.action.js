@@ -9,8 +9,13 @@ export const TBODY_ASCDESC = () => ({
   type: tbodyCommandTypes.TBODY_ASCDESC
 });
 
-export const ORDER_VALUE = (tableHead, array) => ({
+export const ORDER_VALUE = (order, array, ascDesc) => ({
   type: tbodyCommandTypes.ORDER_VALUE,
-  payload: tableHead,
+  payload: order,
   array
+});
+
+export const ISINFAV_VALUE = (id) => ({
+  type: tbodyCommandTypes.ORDER_VALUE,
+  payload: id
 });

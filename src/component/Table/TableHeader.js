@@ -10,7 +10,23 @@ import { selectCommandValue } from "./../../store/tbodyCommand/tbodyCommand.sele
 class TableRowHeaderMap extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      ascdescVal: this.props.ascdescVal
+    };
     this.TableHeader = this.TableHeader.bind(this);
+  }
+
+  settingState = (set) => {
+    this.setState({
+      comVal: set
+    });
+  };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.ascdescVal !== prevState.ascdescVal) {
+      let propCom = nextProps.ascdescVal;
+      return { ascdescVal: nextProps.ascdescVal };
+    }
   }
 
   Button() {
@@ -31,7 +47,7 @@ class TableRowHeaderMap extends Component {
       <th key={number.toString()}>
         <button
           onClick={() => {
-            this.props.changeAscTbody();
+            // this.props.changeAscTbody();
             console.log("this.props.comval");
             console.log(this.props.comVal);
             this.props.setOrderVal(number, this.props.comVal);
@@ -59,12 +75,13 @@ class TableRowHeaderMap extends Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  ascdescVal: selectAscValue,
-  comVal: selectCommandValue
+  comVal: selectCommandValue,
+  ascdescVal: selectAscValue
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeAscTbody: () => dispatch(TBODY_ASCDESC()),
+  // changeAscTbody: (ascDescValue) => dispatch(TBODY_ASCDESC(ascDescValue)),
+
   setOrderVal: (ordvalue, arrayvalue) =>
     dispatch(ORDER_VALUE(ordvalue, arrayvalue))
 });

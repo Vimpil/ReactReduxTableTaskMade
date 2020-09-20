@@ -18,4 +18,10 @@ export const selectOrdValue = createSelector(
   (ordValue) => ordValue.ordValue
 );
 
+const selectFav = (state) => state.faValue;
+export const selectFaValue = createSelector(
+  [selectOrd],
+  (faValue) => faValue.faValue
+);
+
 // ORDER_VALUE

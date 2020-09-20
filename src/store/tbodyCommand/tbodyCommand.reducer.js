@@ -3,12 +3,23 @@ import properties$ from "./../../mock";
 
 const INITIAL_STATE = {
   comVal: [],
-  order: "id"
+  order: "id",
+  ascdescVal: false
 };
 
 var row_temp = [];
 
-var isPaused = false;
+function sortJSON(arr, key, way) {
+  return arr.sort(function (a, b) {
+    var x = a[key];
+    var y = b[key];
+    if (way) {
+      return x < y ? -1 : x > y ? 1 : 0;
+    } else {
+      return x > y ? -1 : x < y ? 1 : 0;
+    }
+  });
+}
 
 const commandReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -16,7 +27,6 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       function makeTbodyArray() {
         let subscription = properties$.subscribe((data) => {
           if (row_temp.length < 10) {
-            isPaused = false;
             // console.log("row_temp" + row_temp);
             data["love"] = 0;
             row_temp.push(data);
@@ -24,7 +34,6 @@ const commandReducer = (state = INITIAL_STATE, action) => {
             console.log("row_temp.length()" + row_temp.length);
             console.log("rETURN" + row_temp[0].id);
             console.log("LAST ONE");
-            isPaused = true;
             subscription.unsubscribe();
           }
         });
@@ -57,40 +66,51 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       //   console.log("await makeTbodyArray()");
       // })(console.log("ENDD"));
 
+      let sortedArrFirst = sortJSON(makeTbodyArray(), "id", state.ascdescVal);
+
       return {
         ...state,
-        comVal: makeTbodyArray()
+        comVal: sortedArrFirst
       };
 
       console.log("makeTbodyArray()ifAFTER");
     case tbodyCommandTypes.ORDER_VALUE:
       console.log("tbodyCommandTypes.ORDER_VALUE");
       console.log(action.payload);
-      function sortJSON(arr, key, way) {
-        return arr.sort(function (a, b) {
-          var x = a[key];
-          var y = b[key];
-          if (way) {
-            return x < y ? -1 : x > y ? 1 : 0;
-          } else {
-            return x > y ? -1 : x < y ? 1 : 0;
-          }
-        });
-      }
+
       console.log("...action");
       console.log(action);
-      console.log(sortJSON(action.array, action.payload, true));
+      // console.log(sortJSON(action.array, action.payload, true));
       let sortedArr = sortJSON(
         action.array,
         action.payload.toLowerCase(),
-        true
+        state.ascdescVal
       );
+      console.log("state.ascdescVal");
+      console.log(state.ascdescVal);
       console.log("tempconsole.log(temp);console.log(temp);console.log(temp);");
 
       return {
         ...state,
-        ordValue: action.payload
+        comVal: sortedArr,
+        ordValue: action.payload,
+        ascdescVal: !state.ascdescVal
       };
+
+    case tbodyCommandTypes.ISINFAV_VALUE:
+      console.log("FAVORITE");
+      console.log("state.comVal[action.payload]");
+      console.log(state.comVal[action.payload]);
+
+      console.log("state.comVal[action.payload]");
+      console.log(state.comVal[action.payload]);
+      state.comVal[action.payload] = !state.comVal[action.payload];
+
+      return {
+        ...state,
+        comVal: [...state.comVal]
+      };
+
     default:
       return state;
   }

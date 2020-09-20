@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { MAKE_TBODY } from "./../../store/tbodyCommand/tbodyCommand.action";
+import {
+  MAKE_TBODY,
+  ISINFAV_VALUE
+} from "./../../store/tbodyCommand/tbodyCommand.action";
+
 import { createStructuredSelector } from "reselect";
 import {
   selectCommandValue,
-  selectOrdValue
+  selectOrdValue,
+  selectAscValue,
+  selectFaValue
 } from "./../../store/tbodyCommand/tbodyCommand.selector";
 
 class TableBody extends Component {
@@ -13,7 +19,7 @@ class TableBody extends Component {
     this.state = {
       // comVal: null,
       // isFilled: true,
-      // ascdescVal: this.props.ascdescVal,
+      ascdescVal: this.props.ascdescVal,
       comVal: this.props.comVal,
       tbody: []
     };
@@ -233,18 +239,14 @@ class TableBody extends Component {
     // })
     var thisObj = this;
     const setStateAsync = (obj, state) => {
-      setTimeout(() => {
-        return new Promise(
-          (resolve) => obj.setState(state, resolve),
-          console.log(
-            "SettingSettingSettingSettingSettingSettingSettingSetting"
-          ),
-          console.log(state),
-          console.log(
-            "SettingSettingSettingSettingSettingSettingSettingSetting"
-          )
-        );
-      }, 1000);
+      // setTimeout(() => {
+      return new Promise(
+        (resolve) => obj.setState(state, resolve),
+        console.log("SettingSettingSettingSettingSettingSettingSettingSetting"),
+        console.log(state),
+        console.log("SettingSettingSettingSettingSettingSettingSettingSetting")
+      );
+      // }, 1000);
     };
 
     let Tbody = [];
@@ -312,7 +314,7 @@ class TableBody extends Component {
         setStateAsync(thisObj, { tbody: result });
 
         // resolve(Loading(thisObj.state.tbody));
-      }, 2000);
+      }, 1000);
     });
   }
 
@@ -322,6 +324,7 @@ class TableBody extends Component {
     console.log(this.state.comVal);
     console.log("/*/*/*/*/*/*/*//**//*/*/*/");
     const isFilled = this.state.tbody_store;
+    const tempProps = this.props;
 
     let Tbody = [];
     function Loading(comVal_insert) {
@@ -334,7 +337,11 @@ class TableBody extends Component {
             <td>{comVal_insert[key].price}</td>
             <td>{comVal_insert[key].lastUpdate}</td>
             <td>{comVal_insert[key].type}</td>
-            <td>{comVal_insert[key].love}</td>
+            <td>
+              {/* <button onClick={tempProps.makeFav(key)}> */}
+              {comVal_insert[key].love}
+              {/* </button> */}
+            </td>
           </tr>
         );
       }
@@ -348,7 +355,7 @@ class TableBody extends Component {
     return (
       <tbody>
         {this.state.tbody.length > 1 ? Loading(this.state.tbody) : template()}
-        {JSON.stringify(this.props.comVal)}
+        {/* {JSON.stringify(this.props.comVal)} */}
       </tbody>
     );
   }
@@ -356,12 +363,15 @@ class TableBody extends Component {
 
 const mapStateToProps = createStructuredSelector({
   comVal: selectCommandValue,
-  ordValue: selectOrdValue
+  ordValue: selectOrdValue,
+  ascdescVal: selectAscValue,
+  faValue: selectFaValue
 });
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const mapDispatchToProps = () => (dispatch) => ({
-  makeTbody: () => dispatch(MAKE_TBODY())
+  makeTbody: () => dispatch(MAKE_TBODY()),
+  makeFav: () => dispatch(ISINFAV_VALUE())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(TableBody);
