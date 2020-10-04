@@ -20,7 +20,7 @@ export const selectOrdValue = createSelector(
 
 const selectFav = (state) => state.faValue;
 export const selectFaValue = createSelector(
-  [selectOrd],
+  [selectFav],
   (faValue) => faValue.faValue
 );
 

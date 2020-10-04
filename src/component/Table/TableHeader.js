@@ -35,12 +35,12 @@ class TableRowHeaderMap extends Component {
 
   TableHeader() {
     var head_names = [
-      "ID",
-      "Address",
-      "Price",
-      "Last Update",
-      "Type",
-      "Is in favorite"
+      { name: "ID", id: "ID" },
+      { name: "Address", id: "Address" },
+      { name: "Price", id: "Price" },
+      { name: "Last Update", id: "lastUpdate" },
+      { name: "Type", id: "Type" },
+      { name: "Is in favorite", id: "love" }
     ];
     // console.log(this.props.ascTbody("as"));
     const HEAD_NAMES = head_names.map((number) => (
@@ -50,12 +50,12 @@ class TableRowHeaderMap extends Component {
             // this.props.changeAscTbody();
             console.log("this.props.comval");
             console.log(this.props.comVal);
-            this.props.setOrderVal(number, this.props.comVal);
+            this.props.setOrderVal(number.id, this.props.comVal);
           }}
           type="button"
         >
           {" "}
-          {number}
+          {number.name}
         </button>
       </th>
     ));

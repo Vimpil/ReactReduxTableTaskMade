@@ -4,7 +4,7 @@ import {
   MAKE_TBODY,
   ISINFAV_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
-
+import "./TRow.js";
 import { createStructuredSelector } from "reselect";
 import {
   selectCommandValue,
@@ -21,6 +21,7 @@ class TableBody extends Component {
       // isFilled: true,
       ascdescVal: this.props.ascdescVal,
       comVal: this.props.comVal,
+      faValue: this.props.faValue,
       tbody: []
     };
   }
@@ -145,7 +146,7 @@ class TableBody extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.comVal !== prevProps.comVal) {
       console.log("(***************componentDidUpdate**************");
-      console.log(this.props.comVal);
+      // console.log(this.props.comVal);
       console.log("(***************componentDidUpdate**************");
 
       // let promise = new Promise(function (resolve, reject, nextProps) {
@@ -290,6 +291,7 @@ class TableBody extends Component {
     //     data[key]["love"].toString() +
     //     "</td>/<tr>";
     // }
+
     function sortJSON(arr, key, way) {
       return arr.sort(function (a, b) {
         var x = a[key];
@@ -302,59 +304,107 @@ class TableBody extends Component {
       });
     }
     console.log("let promise");
-    let promise = new Promise(function (resolve, reject, nextProps) {
-      setTimeout(() => {
-        console.log("Tbody");
-        console.log(Tbody);
-        console.log("tempVal");
-        console.log(thisObj.props.comVal);
-        console.log("sortJSON(thisObj.props.comVal,id,true)");
-        console.log(sortJSON(thisObj.props.comVal, "id", true));
-        let result = sortJSON(thisObj.props.comVal, "id", true);
-        setStateAsync(thisObj, { tbody: result });
+    setTimeout(() => {
+      console.log("Tbody");
+      console.log(Tbody);
+      console.log("tempVal");
+      console.log(thisObj.props.comVal);
+      console.log("sortJSON(thisObj.props.comVal,id,true)");
+      console.log(sortJSON(thisObj.props.comVal, "id", true));
+      let result = sortJSON(thisObj.props.comVal, "id", true);
+      setStateAsync(thisObj, { tbody: result });
 
-        // resolve(Loading(thisObj.state.tbody));
-      }, 1000);
-    });
+      // resolve(Loading(thisObj.state.tbody));
+    }, 1000);
   }
+  makesmth = () => {
+    console.log("12");
+  };
+
+  Loading = (comVal_insert) => {
+    let Tbody = [];
+    var clicks = 0;
+    for (let key in comVal_insert) {
+      Tbody.push(
+        <tr key={key}>
+          <td>{comVal_insert[key].id}</td>
+          <td>{comVal_insert[key].address}</td>
+          <td>{comVal_insert[key].price}</td>
+          <td>{comVal_insert[key].lastUpdate}</td>
+          <td>{comVal_insert[key].type}</td>
+          <td>
+            {/* <button
+            // onClick={
+            //   (console.log("comVal_insert[key].id" + comVal_insert[key].id),
+            //   this.props.makeFav(comVal_insert[key].id))
+            // }
+            >
+              {comVal_insert[key].love}
+            </button> */}
+            {/* key={comVal_insert[key]} */}:
+            {/* {function event_handler (e,arg) { */}
+            <button
+              onClick={(event) => {
+                function setLoveValue(id, jsonObj) {
+                  for (var i = 0; i < jsonObj.length; i++) {
+                    if (jsonObj[i].id === id) {
+                      console.log("weare here");
+                      console.log("id" + id);
+
+                      console.log("love!" + jsonObj[i].love);
+
+                      jsonObj[i].love = !jsonObj[i].love;
+                      console.log("JSON.stringify(jsonObj[i])CHANGED");
+
+                      console.log("love!" + jsonObj[i].love);
+                      return jsonObj;
+                    }
+                  }
+                }
+
+                clicks++;
+                console.log("key" + key);
+                console.log("comVal_insert[key].id" + comVal_insert[key].id);
+                // event_handler(e,comVal_insert[key]);
+                if (clicks > 0) {
+                  console.log("&&&&&&&&&");
+                  this.props.makeFav(
+                    setLoveValue(comVal_insert[key].id, this.state.comVal)
+                  );
+                } else {
+                  console.log("NONONE");
+                }
+              }}
+            >
+              {comVal_insert[key].love ? "true" : "false"}
+            </button>
+            {/* <TRow/> */}
+          </td>
+        </tr>
+      );
+    }
+    return Tbody;
+  };
 
   render() {
     console.log("/*/*/*/*/*/*/*//**//*/*/*/");
     console.log("REDNER CALL");
-    console.log(this.state.comVal);
+    // console.log(this.state.comVal);
     console.log("/*/*/*/*/*/*/*//**//*/*/*/");
     const isFilled = this.state.tbody_store;
     const tempProps = this.props;
 
     let Tbody = [];
-    function Loading(comVal_insert) {
-      Tbody = [];
-      for (let key in comVal_insert) {
-        Tbody.push(
-          <tr key={key}>
-            <td>{comVal_insert[key].id}</td>
-            <td>{comVal_insert[key].address}</td>
-            <td>{comVal_insert[key].price}</td>
-            <td>{comVal_insert[key].lastUpdate}</td>
-            <td>{comVal_insert[key].type}</td>
-            <td>
-              {/* <button onClick={tempProps.makeFav(key)}> */}
-              {comVal_insert[key].love}
-              {/* </button> */}
-            </td>
-          </tr>
-        );
-      }
-      return Tbody;
-    }
     function template() {
       return <p>...Loading</p>;
     }
-    Tbody = Loading(this.state.tbody);
+    Tbody = this.Loading(this.state.tbody);
 
     return (
       <tbody>
-        {this.state.tbody.length > 1 ? Loading(this.state.tbody) : template()}
+        {this.state.tbody.length > 1
+          ? this.Loading(this.state.tbody)
+          : template()}
         {/* {JSON.stringify(this.props.comVal)} */}
       </tbody>
     );
@@ -372,6 +422,14 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const mapDispatchToProps = () => (dispatch) => ({
   makeTbody: () => dispatch(MAKE_TBODY()),
-  makeFav: () => dispatch(ISINFAV_VALUE())
+  makeFav: (arrayvalue) => dispatch(ISINFAV_VALUE(arrayvalue))
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(TableBody);
+
+// const mapDispatchToProps = (dispatch) => ({
+//   // changeAscTbody: (ascDescValue) => dispatch(TBODY_ASCDESC(ascDescValue)),
+
+//   setOrderVal: (ordvalue, arrayvalue) =>
+//     dispatch(ORDER_VALUE(ordvalue, arrayvalue))
+// });

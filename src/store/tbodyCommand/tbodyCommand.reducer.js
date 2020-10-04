@@ -4,7 +4,8 @@ import properties$ from "./../../mock";
 const INITIAL_STATE = {
   comVal: [],
   order: "id",
-  ascdescVal: false
+  ascdescVal: false,
+  faValue: 0
 };
 
 var row_temp = [];
@@ -21,6 +22,22 @@ function sortJSON(arr, key, way) {
   });
 }
 
+// function setLoveValue(id, jsonObj) {
+//   for (var i = 0; i < jsonObj.length; i++) {
+//     if (jsonObj[i].id === id) {
+//       console.log("weare here");
+//       console.log("id" + id);
+
+//       console.log("love!" + jsonObj[i].love);
+
+//       jsonObj[i].love = !jsonObj[i].love;
+//       console.log("JSON.stringify(jsonObj[i])CHANGED");
+
+//       console.log("love!" + jsonObj[i].love);
+//       return jsonObj;
+//     }
+//   }
+// }
 const commandReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case tbodyCommandTypes.MAKE_TBODY:
@@ -73,7 +90,6 @@ const commandReducer = (state = INITIAL_STATE, action) => {
         comVal: sortedArrFirst
       };
 
-      console.log("makeTbodyArray()ifAFTER");
     case tbodyCommandTypes.ORDER_VALUE:
       console.log("tbodyCommandTypes.ORDER_VALUE");
       console.log(action.payload);
@@ -81,6 +97,7 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       console.log("...action");
       console.log(action);
       // console.log(sortJSON(action.array, action.payload, true));
+
       let sortedArr = sortJSON(
         action.array,
         action.payload.toLowerCase(),
@@ -99,16 +116,45 @@ const commandReducer = (state = INITIAL_STATE, action) => {
 
     case tbodyCommandTypes.ISINFAV_VALUE:
       console.log("FAVORITE");
-      console.log("state.comVal[action.payload]");
-      console.log(state.comVal[action.payload]);
+      // console.log("state.comVal[action.payload]");
+      // console.log("action.payload" + action.payload);
+      // console.log("state.comVal" + JSON.stringify(state.comVal));
+      // console.log("state.comVal[action.payload]");
+      // console.log(state.comVal[action.payload]);
+      // // filterById(state.comVal['love'],action.payload) = !state.comVal[action.payload].love;
 
-      console.log("state.comVal[action.payload]");
-      console.log(state.comVal[action.payload]);
-      state.comVal[action.payload] = !state.comVal[action.payload];
+      // console.log("newLovaVal" + JSON.stringify(newLovaVal));
+      // const result=newLovaVal;
+
+      // console.log("action" + JSON.stringify(action));
+      // console.log("state.comVal");
+      // console.log("action" + JSON.stringify(state.comVal));
+
+      // console.log("setLoveValue" + JSON.stringify(result));
+      // const payl = action.payload;
+      // var jsonObj = action.array;
+
+      // const id = action.payload;
+      // var tempval = false;
+      // for (var i = 0; i < jsonObj.length; i++) {
+      //   if (jsonObj[i].id === id) {
+      //     console.log("weare here");
+      //     console.log("id" + id);
+      //     console.log("love!" + jsonObj[i].love);
+      //     tempval = (jsonObj[i].love);
+      //     jsonObj[i].love = !jsonObj[i].love;
+
+      //     console.log("JSON.stringify(jsonObj[i])CHANGED");
+      //     console.log("love!" + jsonObj[i].love);
+      //   }
+      // }
+      console.log(JSON.stringify(action));
 
       return {
         ...state,
-        comVal: [...state.comVal]
+        // ,
+        comVal: action.payload,
+        faValue: state.faValue + 1
       };
 
     default:
