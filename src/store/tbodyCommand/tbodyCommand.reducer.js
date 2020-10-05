@@ -14,10 +14,12 @@ function sortJSON(arr, key, way) {
   return arr.sort(function (a, b) {
     var x = a[key];
     var y = b[key];
+    var xl = a["love"];
+    var yl = b["love"];
     if (way) {
-      return x < y ? -1 : x > y ? 1 : 0;
+      return x < y ? (xl ? -1 : yl ? 1 : -1) : yl ? 1 : xl ? -1 : 1;
     } else {
-      return x > y ? -1 : x < y ? 1 : 0;
+      return x < y ? (xl ? (yl ? 1 : -1) : 1) : yl ? (xl ? -1 : 1) : -1;
     }
   });
 }
