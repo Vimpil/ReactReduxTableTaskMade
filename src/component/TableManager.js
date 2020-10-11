@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TableHeader from "./Table/TableHeader";
 import TableBody from "./Table/TableBody";
+import TSearch from "./Table/TSearch";
 
 class TableManager extends Component {
   componentWillReceiveProps(nextProps, nextContext) {
@@ -11,10 +12,13 @@ class TableManager extends Component {
 
   render() {
     return (
-      <table id="data_table">
-        <TableHeader />
-        <TableBody />
-      </table>
+      <>
+        <TSearch />
+        <table id="data_table">
+          <TableHeader />
+          <TableBody />
+        </table>
+      </>
     );
   }
 }

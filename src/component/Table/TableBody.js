@@ -4,7 +4,6 @@ import {
   MAKE_TBODY,
   ISINFAV_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
-import "./TRow.js";
 import { createStructuredSelector } from "reselect";
 import {
   selectCommandValue,
@@ -37,54 +36,9 @@ class TableBody extends Component {
       // settingState(nextProps);
       console.log("-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-");
       let propCom = nextProps.comVal;
-      //     let promise = new Promise(function (resolve, reject, nextProps) {
-      //      setTimeout(() => {
-      //         resolve(propCom);
-      //         console.log('propCom');
-      //         console.log(propCom);
-      //         function sortJSON(arr, key, way) {
-      //           return arr.sort(function (a, b) {
-      //             var x = a[key];
-      //             var y = b[key];
-      //             if (way) {
-      //               return x < y ? -1 : x > y ? 1 : 0;
-      //             } else {
-      //               return x > y ? -1 : x < y ? 1 : 0;
-      //             }
-      //           });
-      //         }
-      //         let data = sortJSON(propCom);
-      //         console.log('data');
-      //         console.log(data);
-      //         // let joinData = "";
-      //         // for (let key in data) {
-      //         //   joinData +=
-      //         //     "<tr><td>" +
-      //         //     data[key]["id"].toString() +
-      //         //     "</td>" +
-      //         //     "<td>" +
-      //         //     data[key]["address"].toString() +
-      //         //     "</td>" +
-      //         //     "<td>" +
-      //         //     data[key]["price"].toString() +
-      //         //     "</td>" +
-      //         //     "<td>" +
-      //         //     data[key]["lastUpdate"].toString() +
-      //         //     "</td>" +
-      //         //     "<td>" +
-      //         //     data[key]["type"].toString() +
-      //         //     "</td>" +
-      //         //     "<td>" +
-      //         //     data[key]["love"].toString() +
-      //         //     "</td>/<tr>";
-      //         // }
-      //         console.log('MAIN RETURN');
-      //         // return propCom;
-      //       }, 2000);
-      //     });
+
       return { comVal: propCom };
     }
-    //   // else return null;
   }
 
   // UNSAFE_componentWillReceiveProps(nextProps) {
