@@ -1,3 +1,5 @@
+/* ADD suValue */
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
@@ -9,7 +11,8 @@ import {
   selectCommandValue,
   selectOrdValue,
   selectAscValue,
-  selectFaValue
+  selectFaValue,
+  selectSuValue
 } from "./../../store/tbodyCommand/tbodyCommand.selector";
 
 class TableBody extends Component {
@@ -21,6 +24,7 @@ class TableBody extends Component {
       ascdescVal: this.props.ascdescVal,
       comVal: this.props.comVal,
       faValue: this.props.faValue,
+      suValue: this.props.suValue,
       tbody: []
     };
   }
@@ -37,7 +41,19 @@ class TableBody extends Component {
       console.log("-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-");
       let propCom = nextProps.comVal;
 
-      return { comVal: propCom };
+      return { comVal: propCom, tbody: propCom };
+    }
+
+    if (nextProps.suValue !== prevState.suValue) {
+      // settingState(nextProps);
+      console.log("-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-");
+      let propCom = nextProps.suValue;
+      let propCom2 = nextProps.comVal;
+      if (propCom !== 0) {
+        return { tbody: propCom, suValue: propCom };
+      } else {
+        return { tbody: propCom2 };
+      }
     }
   }
 
@@ -356,7 +372,7 @@ class TableBody extends Component {
 
     return (
       <tbody>
-        {this.state.tbody.length > 1
+        {this.state.tbody.length > 0
           ? this.Loading(this.state.tbody)
           : template()}
         {/* {JSON.stringify(this.props.comVal)} */}
@@ -369,7 +385,8 @@ const mapStateToProps = createStructuredSelector({
   comVal: selectCommandValue,
   ordValue: selectOrdValue,
   ascdescVal: selectAscValue,
-  faValue: selectFaValue
+  faValue: selectFaValue,
+  suValue: selectSuValue
 });
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

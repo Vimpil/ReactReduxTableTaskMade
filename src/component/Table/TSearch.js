@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import Autosuggest from "react-autosuggest";
 import { connect } from "react-redux";
+import { SUGG_VALUE } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
-import { selectCommandValue } from "./../../store/tbodyCommand/tbodyCommand.selector";
+import {
+  selectCommandValue,
+  selectSuValue
+} from "./../../store/tbodyCommand/tbodyCommand.selector";
 
 const languages = [];
 //   {
@@ -153,13 +157,19 @@ class TSearch extends React.Component {
     this.state = {
       value: "",
       suggestions: [],
-      comval: this.props.comval
+      suValue: this.props.suValue
     };
   }
 
   settingState = (set) => {
     this.setState({
-      comVal: set
+      suValue: set
+    });
+  };
+
+  settingState2 = (set) => {
+    this.setState({
+      suggestions: set
     });
   };
 
@@ -168,7 +178,8 @@ class TSearch extends React.Component {
       // settingState(nextProps);
       console.log("-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-");
       let propCom = nextProps.comVal;
-      return { comVal: propCom };
+      let propCom2 = nextProps.suValue;
+      return { comVal: propCom, suValue: propCom2 };
     }
   }
 
@@ -176,6 +187,7 @@ class TSearch extends React.Component {
     this.setState({
       value: newValue.toString()
     });
+    this.props.suggVal(0);
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
@@ -190,12 +202,25 @@ class TSearch extends React.Component {
     });
   };
 
+  handleKeyDown = (e) => {
+    // const sugg =getSuggestions(value, this.state.comVa);
+    if (e.key === "Enter") {
+      // this.setState({
+      //   suggestions: getSuggestions(value, this.state.comVal),
+      // });
+
+      // console.log(this.state.suggestions)
+      this.props.suggVal(this.state.suggestions);
+    }
+  };
+
   render() {
     const { value, suggestions } = this.state;
     const inputProps = {
       placeholder: "Type 'c'",
       value,
-      onChange: this.onChange
+      onChange: this.onChange,
+      onKeyDown: this.handleKeyDown
     };
 
     return (
@@ -212,7 +237,12 @@ class TSearch extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  comVal: selectCommandValue
+  comVal: selectCommandValue,
+  suValue: selectSuValue
 });
 
-export default connect(mapStateToProps)(TSearch);
+const mapDispatchToProps = () => (dispatch) => ({
+  suggVal: (arrayvalue) => dispatch(SUGG_VALUE(arrayvalue))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TSearch);

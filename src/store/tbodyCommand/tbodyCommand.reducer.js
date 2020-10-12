@@ -5,7 +5,8 @@ const INITIAL_STATE = {
   comVal: [],
   order: "id",
   ascdescVal: false,
-  faValue: 0
+  faValue: 0,
+  suValue: 0
 };
 
 var row_temp = [];
@@ -155,8 +156,15 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         // ,
-        comVal: action.payload,
-        faValue: state.faValue + 1
+        faValue: action.payload
+      };
+
+    case tbodyCommandTypes.SUGG_VALUE:
+      console.log("SUGG_VALUE");
+      let suArr = action.payload;
+      return {
+        ...state,
+        suValue: suArr
       };
 
     default:

@@ -19,3 +19,8 @@ export const ISINFAV_VALUE = (array) => ({
   type: tbodyCommandTypes.ISINFAV_VALUE,
   payload: array
 });
+
+export const SUGG_VALUE = (array) => ({
+  type: tbodyCommandTypes.SUGG_VALUE,
+  payload: array
+});

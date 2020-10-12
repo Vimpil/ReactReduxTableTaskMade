@@ -5,5 +5,6 @@ export default combineReducers({
   comVal: tbodyReducer,
   ascdescVal: tbodyReducer,
   ordValue: tbodyReducer,
-  faValue: tbodyReducer
+  faValue: tbodyReducer,
+  suValue: tbodyReducer
 });

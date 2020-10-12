@@ -24,4 +24,10 @@ export const selectFaValue = createSelector(
   (faValue) => faValue.faValue
 );
 
+const selectSug = (state) => state.suValue;
+export const selectSuValue = createSelector(
+  [selectSug],
+  (suValue) => suValue.suValue
+);
+
 // ORDER_VALUE
