@@ -30,4 +30,16 @@ export const selectSuValue = createSelector(
   (suValue) => suValue.suValue
 );
 
+const selectTs = (state) => state.TSValue;
+export const selectTsValue = createSelector(
+  [selectTs],
+  (TSValue) => TSValue.TSValue
+);
+
+const selectUpTr = (state) => state.UpTrValue;
+export const selectUpTrValue = createSelector(
+  [selectUpTr],
+  (UpTrValue) => UpTrValue.UpTrValue
+);
+
 // ORDER_VALUE

@@ -5,13 +5,17 @@ import {
   ORDER_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
-import { selectAscValue } from "./../../store/tbodyCommand/tbodyCommand.selector";
+import {
+  selectAscValue,
+  selectSuValue
+} from "./../../store/tbodyCommand/tbodyCommand.selector";
 import { selectCommandValue } from "./../../store/tbodyCommand/tbodyCommand.selector";
 class TableRowHeaderMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ascdescVal: this.props.ascdescVal
+      ascdescVal: this.props.ascdescVal,
+      suValue: this.props.suValue
     };
     this.TableHeader = this.TableHeader.bind(this);
   }
@@ -26,6 +30,8 @@ class TableRowHeaderMap extends Component {
     if (nextProps.ascdescVal !== prevState.ascdescVal) {
       let propCom = nextProps.ascdescVal;
       return { ascdescVal: nextProps.ascdescVal };
+    } else {
+      return null;
     }
   }
 
@@ -43,14 +49,18 @@ class TableRowHeaderMap extends Component {
       { name: "Is in favorite", id: "love" }
     ];
     // console.log(this.props.ascTbody("as"));
-    const HEAD_NAMES = head_names.map((number) => (
-      <th key={number.toString()}>
+    const HEAD_NAMES = head_names.map((number, index) => (
+      <th key={index}>
         <button
           onClick={() => {
             // this.props.changeAscTbody();
             console.log("this.props.comval");
             console.log(this.props.comVal);
-            this.props.setOrderVal(number.id, this.props.comVal);
+            if (this.props.suValue === 0) {
+              this.props.setOrderVal(number.id, this.props.comVal);
+            } else {
+              this.props.setOrderVal(number.id, this.props.suValue);
+            }
           }}
           type="button"
         >
@@ -76,7 +86,8 @@ class TableRowHeaderMap extends Component {
 
 const mapStateToProps = createStructuredSelector({
   comVal: selectCommandValue,
-  ascdescVal: selectAscValue
+  ascdescVal: selectAscValue,
+  suValue: selectSuValue
 });
 
 const mapDispatchToProps = (dispatch) => ({

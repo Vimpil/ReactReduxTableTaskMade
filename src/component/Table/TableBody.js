@@ -36,14 +36,6 @@ class TableBody extends Component {
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.comVal !== prevState.comVal) {
-      // settingState(nextProps);
-      console.log("-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-");
-      let propCom = nextProps.comVal;
-
-      return { comVal: propCom, tbody: propCom };
-    }
-
     if (nextProps.suValue !== prevState.suValue) {
       // settingState(nextProps);
       console.log("-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-");
@@ -55,121 +47,30 @@ class TableBody extends Component {
         return { tbody: propCom2 };
       }
     }
+
+    if (nextProps.faValue !== prevState.faValue) {
+      let propCom = nextProps.faValue;
+      return { faValue: propCom, comValue: propCom };
+    }
+
+    if (nextProps.comVal !== prevState.comVal) {
+      // settingState(nextProps);
+      console.log("-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-");
+      let propCom = nextProps.comVal;
+
+      return { comVal: propCom, tbody: propCom };
+    }
   }
-
-  // UNSAFE_componentWillReceiveProps(nextProps) {
-  //   var nextP = nextProps;
-
-  //   if (nextProps.comVal !== this.state.comVal) {
-  //     this.setState({
-  //       comVal: nextProps.comVal
-  //     });
-  // console.log(
-  //   "(***************UNSAFE_componentWillReceiveProps**************"
-  // );
-  // console.log(nextProps.comVal.length),
-  //   console.log(
-  //     "(***************UNSAFE_componentWillReceiveProps**************"
-  //   );
-
-  // function getPropsVal() {
-  //   return nextProps.comVal;
-  // }
-
-  // const setStateAsync = ( obj, state ) => {
-  //   setTimeout(() => {
-  //   return new Promise( ( resolve ) =>
-  //       obj.setState( state , resolve )
-  //   )}, 1000);
-  // }
-
-  // console.log("let promise");
-  // let promise = new Promise(function (resolve, reject, nextProps) {
-  //   setTimeout(() => {
-  //     resolve(Loading(getPropsVal()));
-  //     console.log("tempVal");
-  //     console.log(nextP);
-
-  //   }, 1000);
-  //   setStateAsync(thisObj,{comVal:nextP.comVal})
-  // });
-
-  // let Tbody = [];
-  // function Loading(comVal_insert) {
-  //   for (let key in comVal_insert) {
-  //     Tbody.push(
-  //       <tr key={key}>
-  //         <td>{comVal_insert[key].id}</td>
-  //         <td>{comVal_insert[key].address}</td>
-  //         <td>{comVal_insert[key].price}</td>
-  //         <td>{comVal_insert[key].lastUpdate}</td>
-  //         <td>{comVal_insert[key].type}</td>
-  //         <td>{comVal_insert[key].love}</td>
-  //       </tr>
-  //     );
-  //   }
-  // }
-
-  //   }
-  // }
 
   componentDidUpdate(prevProps) {
     if (this.props.comVal !== prevProps.comVal) {
       console.log("(***************componentDidUpdate**************");
       // console.log(this.props.comVal);
       console.log("(***************componentDidUpdate**************");
-
-      // let promise = new Promise(function (resolve, reject, nextProps) {
-      //   setTimeout(() => {
-      //     resolve(console.log("PROMISE"));
-      //     this.setState({
-      //       comVal:this.state.comVal
-      //     })
-      //   }, 1000);
-      // });
-    }
-  }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (nextProps.comVal !== this.props.comVal) {
-  //     console.log(
-  //       "shouldComponentUpdate!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-  //     );
-  //     // this.setState({
-  //     //   tbody: nextProps.comVal
-  //     // });
-  //     console.log(
-  //       "CHANGED%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-  //     );
-  //     return { tbody: nextProps.comVal };
-  //   }
-
-  //   if (nextState.tbody !== this.state.tbody) {
-  //     console.log("nextState.tbody !== this.state.tbody");
-  //   }
-
-  //   console.log(nextProps, nextState);
-  //   console.log(this.props, this.state);
-
-  //   return true;
-  // }
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.comVal !== this.props.comVal) {
-      console.log("UNSAFE_componentWillReceiveProps nextProps, nextState");
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    //   if (nextState.comVal !== this.props.comVal) {
-    // console.log(nextProps, nextState);
-    // console.log(this.props, this.state);
-    // return true;
-    //   }
-    // if (nextState.comVal !== this.state.comVal) {
-    //   console.log(nextProps, nextState);
-    //   console.log(this.props, this.state);
-    //   return true;
-    //     }
     if (nextState.comVal !== this.props.comVal) {
       console.log("shouldComponentUpdate nextProps, nextState");
       console.log(nextProps, nextState);
@@ -221,46 +122,6 @@ class TableBody extends Component {
     };
 
     let Tbody = [];
-    // function Loading(comVal_insert) {
-    //   for (let key in comVal_insert) {
-    //     Tbody.push(
-    //       <tr key={key}>
-    //         <td>{comVal_insert[key].id}</td>
-    //         <td>{comVal_insert[key].address}</td>
-    //         <td>{comVal_insert[key].price}</td>
-    //         <td>{comVal_insert[key].lastUpdate}</td>
-    //         <td>{comVal_insert[key].type}</td>
-    //         <td>{comVal_insert[key].love}</td>
-    //       </tr>
-    //     );
-    //   }
-    // }
-
-    // let data = sortJSON(propCom);
-    // console.log('data');
-    // console.log(data);
-    // let joinData = "";
-    // for (let key in data) {
-    //   joinData +=
-    //     "<tr><td>" +
-    //     data[key]["id"].toString() +
-    //     "</td>" +
-    //     "<td>" +
-    //     data[key]["address"].toString() +
-    //     "</td>" +
-    //     "<td>" +
-    //     data[key]["price"].toString() +
-    //     "</td>" +
-    //     "<td>" +
-    //     data[key]["lastUpdate"].toString() +
-    //     "</td>" +
-    //     "<td>" +
-    //     data[key]["type"].toString() +
-    //     "</td>" +
-    //     "<td>" +
-    //     data[key]["love"].toString() +
-    //     "</td>/<tr>";
-    // }
 
     function sortJSON(arr, key, way) {
       return arr.sort(function (a, b) {
@@ -303,16 +164,6 @@ class TableBody extends Component {
           <td>{comVal_insert[key].lastUpdate}</td>
           <td>{comVal_insert[key].type}</td>
           <td>
-            {/* <button
-            // onClick={
-            //   (console.log("comVal_insert[key].id" + comVal_insert[key].id),
-            //   this.props.makeFav(comVal_insert[key].id))
-            // }
-            >
-              {comVal_insert[key].love}
-            </button> */}
-            {/* key={comVal_insert[key]} */}:
-            {/* {function event_handler (e,arg) { */}
             <button
               onClick={(event) => {
                 function setLoveValue(id, jsonObj) {
@@ -397,10 +248,3 @@ const mapDispatchToProps = () => (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableBody);
-
-// const mapDispatchToProps = (dispatch) => ({
-//   // changeAscTbody: (ascDescValue) => dispatch(TBODY_ASCDESC(ascDescValue)),
-
-//   setOrderVal: (ordvalue, arrayvalue) =>
-//     dispatch(ORDER_VALUE(ordvalue, arrayvalue))
-// });

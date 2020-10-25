@@ -24,3 +24,13 @@ export const SUGG_VALUE = (array) => ({
   type: tbodyCommandTypes.SUGG_VALUE,
   payload: array
 });
+
+export const TSEARCH_VALUE = (searchTerm) => ({
+  type: tbodyCommandTypes.TSEARCH_VALUE,
+  payload: searchTerm
+});
+
+export const UPDATETRIGGER_VALUE = (triggerVal) => ({
+  type: tbodyCommandTypes.UPDATETRIGGER_VALUE,
+  payload: triggerVal
+});

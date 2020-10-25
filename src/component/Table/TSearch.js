@@ -1,115 +1,18 @@
 import React, { Component } from "react";
 import Autosuggest from "react-autosuggest";
 import { connect } from "react-redux";
-import { SUGG_VALUE } from "./../../store/tbodyCommand/tbodyCommand.action";
+import {
+  SUGG_VALUE,
+  TSEARCH_VALUE
+} from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
 import {
   selectCommandValue,
-  selectSuValue
+  selectSuValue,
+  selectTsValue
 } from "./../../store/tbodyCommand/tbodyCommand.selector";
 
 const languages = [];
-//   {
-//     id: 10000,
-//     address: "Tatehaven 130 O'Keefe Skyway",
-//     price: 112109,
-//     lastUpdate: 1601985151939,
-//     type: "Home",
-//     love: 0
-//   },
-//   {
-//     id: 10001,
-//     address: "East Bruce 474 Rice Lock",
-//     price: 165476,
-//     lastUpdate: 1601985151941,
-//     type: "Home",
-//     love: 0
-//   }
-// ];
-
-// [
-//   {
-//     title: 1970,
-//     languages: [
-//       {
-//         name: "C",
-//         year: 1972
-//       }
-//     ]
-//   },
-//   {
-//     title: 1980,
-//     languages: [
-//       {
-//         name: "C++",
-//         year: 1983
-//       },
-//       {
-//         name: "Perl",
-//         year: 1987
-//       }
-//     ]
-//   },
-//   {
-//     title: 1990,
-//     languages: [
-//       {
-//         name: "Haskell",
-//         year: 1990
-//       },
-//       {
-//         name: "Python",
-//         year: 1991
-//       },
-//       {
-//         name: "Java",
-//         year: 1995
-//       },
-//       {
-//         name: "Javascript",
-//         year: 1995
-//       },
-//       {
-//         name: "PHP",
-//         year: 1995
-//       },
-//       {
-//         name: "Ruby",
-//         year: 1995
-//       }
-//     ]
-//   },
-//   {
-//     title: 2000,
-//     languages: [
-//       {
-//         name: "C#",
-//         year: 2000
-//       },
-//       {
-//         name: "Scala",
-//         year: 2003
-//       },
-//       {
-//         name: "Clojure",
-//         year: 2007
-//       },
-//       {
-//         name: "Go",
-//         year: 2009
-//       }
-//     ]
-//   },
-//   {
-//     title: 2010,
-//     languages: [
-//       {
-//         name: "Elm",
-//         year: 2012
-//       }
-//     ]
-//   }
-// ];
 
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -157,7 +60,7 @@ class TSearch extends React.Component {
     this.state = {
       value: "",
       suggestions: [],
-      suValue: this.props.suValue
+      suValue: 0
     };
   }
 
@@ -181,13 +84,29 @@ class TSearch extends React.Component {
       let propCom2 = nextProps.suValue;
       return { comVal: propCom, suValue: propCom2 };
     }
+    if (nextProps.suValue !== prevState.suValue) {
+      let propCom = nextProps.suValue;
+      return { suValue: propCom };
+    }
+    if (nextProps.TSvalue !== prevState.TSvalue) {
+      let propCom = nextProps.TSvalue;
+      return { TSvalue: propCom };
+    }
+  }
+
+  shouldComponentUpdate(prevState) {
+    if (this.state.comVal !== prevState.comVal) {
+      console.log("1-1-1-1-1thats comp update!1-1-1-1-1");
+      this.props.suggVal(this.state.suggestions);
+      return true;
+    }
+    return true;
   }
 
   onChange = (event, { newValue }) => {
     this.setState({
       value: newValue.toString()
     });
-    this.props.suggVal(0);
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
@@ -210,6 +129,11 @@ class TSearch extends React.Component {
       // });
 
       // console.log(this.state.suggestions)
+      this.props.STSVal(e.target.value);
+      // console.log("this.target");
+      // console.log(e.target.value);
+      // console.log("this.target");
+
       this.props.suggVal(this.state.suggestions);
     }
   };
@@ -238,11 +162,13 @@ class TSearch extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   comVal: selectCommandValue,
-  suValue: selectSuValue
+  suValue: selectSuValue,
+  TSvalue: selectTsValue
 });
 
 const mapDispatchToProps = () => (dispatch) => ({
-  suggVal: (arrayvalue) => dispatch(SUGG_VALUE(arrayvalue))
+  suggVal: (arrayvalue) => dispatch(SUGG_VALUE(arrayvalue)),
+  STSVal: (TSvalue) => dispatch(TSEARCH_VALUE(TSvalue))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TSearch);
