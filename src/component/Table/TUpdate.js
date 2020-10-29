@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   MAKE_TBODY,
-  TSEARCH_VALUE
+  TSEARCH_VALUE,
+  UPDATETRIGGER_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
 import {
@@ -10,7 +11,8 @@ import {
   selectOrdValue,
   selectAscValue,
   selectSuValue,
-  selectTsValue
+  selectTsValue,
+  selectUpTrValue
 } from "./../../store/tbodyCommand/tbodyCommand.selector";
 
 class TUpdate extends Component {
@@ -21,45 +23,71 @@ class TUpdate extends Component {
       ascdescVal: this.props.ascdescVal,
       suValue: this.props.suValue,
       tbody: this.props.tbody,
-      TSvalue: this.props.TSvalue
+      TSvalue: this.props.TSvalue,
+      upTrValue: this.props.upTrValue
     };
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.TSvalue !== prevState.TSvalue) {
-      let propCom = nextProps.TSvalue;
+    if (nextProps) {
+      let obj = {};
 
-      return { TSvalue: propCom };
-    }
-
-    if (nextProps.suValue !== prevState.suValue) {
-      let propCom = nextProps.suValue;
-      let propCom2 = nextProps.comVal;
-      if (propCom !== null) {
-        return { tbody: propCom, suValue: propCom };
-      } else {
-        return { tbody: propCom2 };
+      if (nextProps.TSvalue !== prevState.TSvalue) {
+        let propCom = nextProps.TSvalue;
+        obj.TSvalue = propCom;
       }
-    }
 
-    if (nextProps.comVal !== prevState.comVal) {
-      // settingState(nextProps);
-      console.log("-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-");
-      let propCom = nextProps.comVal;
+      if (nextProps.suValue !== prevState.suValue) {
+        let propCom = nextProps.suValue;
+        let propCom2 = nextProps.comVal;
+        if (propCom !== null) {
+          obj.tbody = propCom;
+          obj.suValue = propCom;
+        } else {
+          obj.tbody = propCom2;
+        }
+      }
 
-      return { comVal: propCom, tbody: propCom };
+      if (nextProps.comVal !== prevState.comVal) {
+        let propCom = nextProps.comVal;
+
+        obj.comVal = propCom;
+        obj.tbody = propCom;
+      }
+
+      if (nextProps.upTrValue !== prevState.upTrValue) {
+        let propCom = nextProps.upTrValue;
+        obj.upTrValue = propCom;
+      }
+
+      return obj;
     }
   }
 
   componentDidMount() {
     const timer = setTimeout((props) => {
       console.log("timer");
-      // if (this.props.TSvalue === undefined) {
-      //   this.props.makeTbody();
-      // } else {
       this.props.makeTbody();
-      // }
-    }, 2000);
+      if (!this.state.upTrValue) {
+        this.props.changeUpdateTrValue();
+      }
+    }, 5000);
+
+    const timer2 = setTimeout((props) => {
+      console.log("timer");
+      this.props.makeTbody();
+      if (!this.state.upTrValue) {
+        this.props.changeUpdateTrValue();
+      }
+    }, 10000);
+
+    const timer3 = setTimeout((props) => {
+      console.log("timer");
+      this.props.makeTbody();
+      if (!this.state.upTrValue) {
+        this.props.changeUpdateTrValue();
+      }
+    }, 15000);
   }
 
   render() {
@@ -72,12 +100,13 @@ const mapStateToProps = createStructuredSelector({
   ordValue: selectOrdValue,
   ascdescVal: selectAscValue,
   suValue: selectSuValue,
-  TSvalue: selectTsValue
+  TSvalue: selectTsValue,
+  upTrValue: selectUpTrValue
 });
 
 const mapDispatchToProps = () => (dispatch) => ({
-  makeTbody: () => dispatch(MAKE_TBODY())
-  // STSVal: (TSvalue) => dispatch(TSEARCH_VALUE(TSvalue))
+  makeTbody: () => dispatch(MAKE_TBODY()),
+  changeUpdateTrValue: () => dispatch(UPDATETRIGGER_VALUE())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TUpdate);

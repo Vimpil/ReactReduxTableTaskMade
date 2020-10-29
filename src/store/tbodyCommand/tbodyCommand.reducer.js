@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   ascdescVal: true,
   faValue: 0,
   suValue: 0,
-  UpTrValue: false
+  upTrValue: false
 };
 
 var row_temp = [];
@@ -59,34 +59,10 @@ const commandReducer = (state = INITIAL_STATE, action) => {
           }
         });
         return row_temp;
-        // return ["another", "HEYY", 3];
       }
       console.log("makeTbodyArray()" + row_temp);
-      // makeTbodyArray().then(function() {
-      //   console.log('smth()')}
-      // );
-
       console.log("makeTbodyArray()after" + row_temp);
-      // var array = makeTbodyArray();
       console.log("makeTbodyArray()if");
-
-      // while (!isPaused) {
-      //   console.log("isPaused" + isPaused);
-      //   makeTbodyArray();
-      // }
-
-      // let promise = new Promise(function (resolve, reject) {
-      //   setTimeout(() => resolve(
-
-      //     ), 2000);
-      // });
-
-      // var array = (async () => {
-      //   console.log("await makeTbodyArray()");
-      //   await makeTbodyArray();
-      //   console.log("await makeTbodyArray()");
-      // })(console.log("ENDD"));
-
       let sortedArrFirst = sortJSON(
         makeTbodyArray(),
         state.ordValue,
@@ -159,10 +135,10 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       };
 
     case tbodyCommandTypes.UPDATETRIGGER_VALUE:
-      let UpTrValue = action.payload;
+      let notBool = !state.upTrValue;
       return {
         ...state,
-        UpTrValue: UpTrValue
+        upTrValue: notBool
       };
 
     default:

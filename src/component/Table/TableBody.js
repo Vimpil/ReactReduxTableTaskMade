@@ -4,7 +4,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   MAKE_TBODY,
-  ISINFAV_VALUE
+  ISINFAV_VALUE,
+  UPDATETRIGGER_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
 import {
@@ -12,7 +13,8 @@ import {
   selectOrdValue,
   selectAscValue,
   selectFaValue,
-  selectSuValue
+  selectSuValue,
+  selectUpTrValue
 } from "./../../store/tbodyCommand/tbodyCommand.selector";
 
 class TableBody extends Component {
@@ -42,8 +44,12 @@ class TableBody extends Component {
       let propCom = nextProps.suValue;
       let propCom2 = nextProps.comVal;
       if (propCom !== 0) {
+        // console.log("-0-0-0-0-0-0-0-1-suValue-1-0-0-0-0-0-0-0-");
+        // console.log('JSON.parse(propCom)');
+        // console.log(JSON.stringify(propCom));
         return { tbody: propCom, suValue: propCom };
       } else {
+        console.log("-0-0-0-0-0-0-0-2-suValue-2-0-0-0-0-0-0-0-");
         return { tbody: propCom2 };
       }
     }
@@ -55,8 +61,11 @@ class TableBody extends Component {
 
     if (nextProps.comVal !== prevState.comVal) {
       // settingState(nextProps);
-      console.log("-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-");
+      console.log("-0-0-0-0-0-0-0-0-comVal-0-0-0-0-0-0-0-");
       let propCom = nextProps.comVal;
+      console.log("-0-0-0-0-0-0-0-1-comVal-1-0-0-0-0-0-0-0-");
+      console.log("JSON.parse(propCom)");
+      console.log(JSON.stringify(propCom));
 
       return { comVal: propCom, tbody: propCom };
     }
@@ -237,14 +246,16 @@ const mapStateToProps = createStructuredSelector({
   ordValue: selectOrdValue,
   ascdescVal: selectAscValue,
   faValue: selectFaValue,
-  suValue: selectSuValue
+  suValue: selectSuValue,
+  upTrValue: selectUpTrValue
 });
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const mapDispatchToProps = () => (dispatch) => ({
   makeTbody: () => dispatch(MAKE_TBODY()),
-  makeFav: (arrayvalue) => dispatch(ISINFAV_VALUE(arrayvalue))
+  makeFav: (arrayvalue) => dispatch(ISINFAV_VALUE(arrayvalue)),
+  changeUpTr: () => dispatch(UPDATETRIGGER_VALUE())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableBody);

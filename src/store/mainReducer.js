@@ -8,5 +8,5 @@ export default combineReducers({
   faValue: tbodyReducer,
   suValue: tbodyReducer,
   TSValue: tbodyReducer,
-  UpTrValue: tbodyReducer
+  upTrValue: tbodyReducer
 });

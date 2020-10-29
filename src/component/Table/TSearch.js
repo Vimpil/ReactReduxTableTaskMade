@@ -3,13 +3,15 @@ import Autosuggest from "react-autosuggest";
 import { connect } from "react-redux";
 import {
   SUGG_VALUE,
-  TSEARCH_VALUE
+  TSEARCH_VALUE,
+  UPDATETRIGGER_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
 import {
   selectCommandValue,
   selectSuValue,
-  selectTsValue
+  selectTsValue,
+  selectUpTrValue
 } from "./../../store/tbodyCommand/tbodyCommand.selector";
 
 const languages = [];
@@ -43,16 +45,6 @@ const renderSuggestion = (suggestion) => (
   </>
 );
 
-// function renderSectionTitle(section) {
-//   return <strong>
-//   {section.title}
-//   </strong>;
-// }
-
-// function getSectionSuggestions(section) {
-//   return section.languages;
-// }
-
 class TSearch extends React.Component {
   constructor(props) {
     super(props);
@@ -60,7 +52,10 @@ class TSearch extends React.Component {
     this.state = {
       value: "",
       suggestions: [],
-      suValue: 0
+      suValue: 0,
+      upTrValue: this.props.upTrValue,
+      comVal: this.props.comVal,
+      TSvalue: this.props.TSvalue
     };
   }
 
@@ -79,7 +74,7 @@ class TSearch extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.comVal !== prevState.comVal) {
       // settingState(nextProps);
-      console.log("-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-");
+      console.log("-0-0-0-0-0-0-0-0-getDerivedStateFromProps-0-0-0-0-0-0-0-0-");
       let propCom = nextProps.comVal;
       let propCom2 = nextProps.suValue;
       return { comVal: propCom, suValue: propCom2 };
@@ -92,14 +87,59 @@ class TSearch extends React.Component {
       let propCom = nextProps.TSvalue;
       return { TSvalue: propCom };
     }
+    if (nextProps.upTrValue !== prevState.upTrValue) {
+      let propCom = nextProps.upTrValue;
+      return { upTrValue: propCom };
+    }
+    // if (nextProps.upTrValue !== prevState.upTrValue) {
+    //   let propCom = nextProps.upTrValue;
+    //   return { upTrValue: propCom };
+    // } else {
+    //   return { upTrValue: undefined };
+    // }
   }
 
-  shouldComponentUpdate(prevState) {
-    if (this.state.comVal !== prevState.comVal) {
-      console.log("1-1-1-1-1thats comp update!1-1-1-1-1");
-      this.props.suggVal(this.state.suggestions);
-      return true;
+  shouldComponentUpdate(prevState, nextProps) {
+    console.log("1-1-1-1-1shouldComponentUpdate!1-1-1-1-1");
+    // }
+    // this.dispatchEvent(new KeyboardEvent('keypress', {
+    //   key: 'Enter',
+    // }));
+    if (this.state.upTrValue) {
+      console.log("this.state.upTrValue");
+      console.log("this.state.comVal !== undefined");
+      console.log(this.state.comVal !== undefined);
+      console.log("this.state.TSvalue !== undefined");
+      console.log(this.state.TSvalue !== undefined);
+      console.log("this.state.TSvalue");
+      console.log(this.state.TSvalue);
+
+      console.log("this.state.upTrValue !== undefined");
+      console.log(this.state.upTrValue !== undefined);
+
+      if (
+        this.state.comVal !== undefined &&
+        this.state.TSvalue !== undefined &&
+        this.state.upTrValue !== undefined
+      ) {
+        console.log(
+          "this.props.suggVal(getSuggestions(this.props.TSvalue, this.state.comVal))"
+        );
+
+        // this.props.suggVal(
+        //   getSuggestions(this.props.TSvalue, this.state.comVal)
+        // );
+        Autosuggest.dispatchEvent(
+          new KeyboardEvent("keypress", {
+            key: "Enter"
+          })
+        );
+        this.props.changeUpdateTrValue();
+      }
     }
+
+    //   return true;
+    // }
     return true;
   }
 
@@ -121,21 +161,14 @@ class TSearch extends React.Component {
     });
   };
 
-  handleKeyDown = (e) => {
-    // const sugg =getSuggestions(value, this.state.comVa);
-    if (e.key === "Enter") {
-      // this.setState({
-      //   suggestions: getSuggestions(value, this.state.comVal),
-      // });
-
-      // console.log(this.state.suggestions)
-      this.props.STSVal(e.target.value);
-      // console.log("this.target");
-      // console.log(e.target.value);
-      // console.log("this.target");
-
+  handleKeyDown = (event) => {
+    // onKeyUp(event) {
+    if (event.key === "Enter") {
+      // if (event.charCode === 13) {
+      this.props.STSVal(event.target.value);
       this.props.suggVal(this.state.suggestions);
     }
+    // }
   };
 
   render() {
@@ -149,6 +182,7 @@ class TSearch extends React.Component {
 
     return (
       <Autosuggest
+        id="optionalInput"
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
@@ -163,12 +197,15 @@ class TSearch extends React.Component {
 const mapStateToProps = createStructuredSelector({
   comVal: selectCommandValue,
   suValue: selectSuValue,
-  TSvalue: selectTsValue
+  TSvalue: selectTsValue,
+  upTrValue: selectUpTrValue
 });
 
 const mapDispatchToProps = () => (dispatch) => ({
   suggVal: (arrayvalue) => dispatch(SUGG_VALUE(arrayvalue)),
-  STSVal: (TSvalue) => dispatch(TSEARCH_VALUE(TSvalue))
+  STSVal: (TSvalue) => dispatch(TSEARCH_VALUE(TSvalue)),
+  changeUpdateTrValue: () => dispatch(UPDATETRIGGER_VALUE())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TSearch);
+// updating uptrvalue no cahnges why

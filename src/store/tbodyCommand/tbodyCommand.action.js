@@ -30,7 +30,6 @@ export const TSEARCH_VALUE = (searchTerm) => ({
   payload: searchTerm
 });
 
-export const UPDATETRIGGER_VALUE = (triggerVal) => ({
-  type: tbodyCommandTypes.UPDATETRIGGER_VALUE,
-  payload: triggerVal
+export const UPDATETRIGGER_VALUE = () => ({
+  type: tbodyCommandTypes.UPDATETRIGGER_VALUE
 });

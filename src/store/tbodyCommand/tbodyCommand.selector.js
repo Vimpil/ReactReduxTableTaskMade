@@ -36,10 +36,10 @@ export const selectTsValue = createSelector(
   (TSValue) => TSValue.TSValue
 );
 
-const selectUpTr = (state) => state.UpTrValue;
+const selectUpTr = (state) => state.upTrValue;
 export const selectUpTrValue = createSelector(
   [selectUpTr],
-  (UpTrValue) => UpTrValue.UpTrValue
+  (upTrValue) => upTrValue.upTrValue
 );
 
 // ORDER_VALUE
