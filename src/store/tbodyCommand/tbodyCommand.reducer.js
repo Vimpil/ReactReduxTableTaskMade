@@ -184,8 +184,11 @@ const commandReducer = (state = INITIAL_STATE, action) => {
             // if(entry.id.includes())
             let parses = entry.type;
             let inside = "home".includes(needToFind);
+            console.log('"home".includes(needToFind)');
+            console.log(inside);
+            console.log(needToFind);
 
-            if (entry.type.toString().includes(needToFind)) {
+            if (entry.type.toString().toLowerCase().includes(needToFind)) {
               sugArr.push(entry);
             }
           });
