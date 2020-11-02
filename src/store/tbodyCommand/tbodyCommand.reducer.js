@@ -7,7 +7,8 @@ const INITIAL_STATE = {
   ascdescVal: true,
   faValue: 0,
   suValue: 0,
-  upTrValue: false
+  upTrValue: false,
+  TSValue: undefined
 };
 
 var row_temp = [];
@@ -119,16 +120,91 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       };
 
     case tbodyCommandTypes.SUGG_VALUE:
+      function isNumeric(str) {
+        if (typeof str != "string") return false; // we only process strings!
+        return (
+          !isNaN(str) && !isNaN(parseFloat(str)) // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+        ); // ...and ensure strings of whitespace fail
+      }
+      let sugArr = [];
+
       console.log("SUGG_VALUE");
-      let suArr = action.payload;
+      let input = state.TSValue;
+
+      console.log("input");
+      console.log(input);
+
+      console.log("isNumeric(needToFind)");
+      console.log(isNumeric(input));
+
+      function compare(needToFind) {
+        console.log("needToFind");
+        console.log(needToFind);
+
+        console.log("typeof needToFind");
+        console.log(typeof needToFind);
+
+        if (isNumeric(needToFind)) {
+          console.log("comVal");
+          console.log(action.payload);
+          action.payload.forEach(function (entry) {
+            // if(entry.id.includes())
+            console.log("entry");
+            console.log(entry);
+            console.log("entry.id.includes(needToFind);");
+            console.log(typeof entry.id);
+            console.log(typeof needToFind);
+            let parses = entry.id;
+            let inside = "1001".includes(needToFind);
+            console.log("parses");
+            console.log(parses);
+            console.log("inside");
+            console.log(inside);
+
+            if (entry.id.toString().includes(needToFind)) {
+              console.log("MATCH");
+              console.log(entry.id);
+              sugArr.push(entry);
+            }
+          });
+          // action.payload.forEach(element=>{if(element.id.includes(needToFind))}){
+          // }
+          console.log("sugArr");
+          console.log(JSON.stringify(sugArr));
+        } else if (
+          needToFind.toLowerCase() === "home" ||
+          needToFind.toLowerCase() === "condo"
+        ) {
+          console.log("SOME STRINGS");
+          console.log(needToFind);
+          console.log(needToFind.toLowerCase());
+          console.log(needToFind.toLowerCase() === "home");
+          console.log(needToFind.toLowerCase());
+          action.payload.forEach(function (entry) {
+            // if(entry.id.includes())
+            let parses = entry.type;
+            let inside = "home".includes(needToFind);
+
+            if (entry.type.toString().includes(needToFind)) {
+              sugArr.push(entry);
+            }
+          });
+        }
+        return sugArr;
+      }
+
+      console.log("SSSSSSSone");
+      // else if(){}
+
       return {
         ...state,
-        suValue: suArr
+        suValue: compare(input)
       };
 
     case tbodyCommandTypes.TSEARCH_VALUE:
       console.log("SUGG_VALUE");
       let TSValue = action.payload;
+      console.log("THATS SEARCH VALUE");
       return {
         ...state,
         TSValue: TSValue

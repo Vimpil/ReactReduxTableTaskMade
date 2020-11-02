@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import {
   MAKE_TBODY,
   TSEARCH_VALUE,
-  UPDATETRIGGER_VALUE
+  UPDATETRIGGER_VALUE,
+  SUGG_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
 import {
@@ -24,7 +25,8 @@ class TUpdate extends Component {
       suValue: this.props.suValue,
       tbody: this.props.tbody,
       TSvalue: this.props.TSvalue,
-      upTrValue: this.props.upTrValue
+      upTrValue: this.props.upTrValue,
+      suggVal: this.props.suggVal
     };
   }
 
@@ -68,24 +70,29 @@ class TUpdate extends Component {
     const timer = setTimeout((props) => {
       console.log("timer");
       this.props.makeTbody();
-      if (!this.state.upTrValue) {
-        this.props.changeUpdateTrValue();
+      console.log("this.state.suValue");
+      console.log(this.state.suValue);
+      if (this.state.suValue !== 0) {
+        this.props.suggVal(this.state.comVal);
       }
+      // if (!this.state.upTrValue) {
+      //   this.props.changeUpdateTrValue();
+      // }
     }, 5000);
 
     const timer2 = setTimeout((props) => {
       console.log("timer");
       this.props.makeTbody();
-      if (!this.state.upTrValue) {
-        this.props.changeUpdateTrValue();
+      if (this.state.suValue !== 0) {
+        this.props.suggVal(this.state.comVal);
       }
     }, 10000);
 
     const timer3 = setTimeout((props) => {
       console.log("timer");
       this.props.makeTbody();
-      if (!this.state.upTrValue) {
-        this.props.changeUpdateTrValue();
+      if (this.state.suValue !== 0) {
+        this.props.suggVal(this.state.comVal);
       }
     }, 15000);
   }
@@ -105,6 +112,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = () => (dispatch) => ({
+  suggVal: (arrayvalue) => dispatch(SUGG_VALUE(arrayvalue)),
   makeTbody: () => dispatch(MAKE_TBODY()),
   changeUpdateTrValue: () => dispatch(UPDATETRIGGER_VALUE())
 });

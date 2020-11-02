@@ -38,9 +38,11 @@ class TableBody extends Component {
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.suValue !== prevState.suValue) {
+    if (nextProps.suValue !== []) {
       // settingState(nextProps);
-      console.log("-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-");
+      console.log(
+        "-0-0-0-0-0-0-0-0-nextProps.suValue !== prevState.suValue-0-0-0-0-0-0-0-0-"
+      );
       let propCom = nextProps.suValue;
       let propCom2 = nextProps.comVal;
       if (propCom !== 0) {
@@ -50,6 +52,7 @@ class TableBody extends Component {
         return { tbody: propCom, suValue: propCom };
       } else {
         console.log("-0-0-0-0-0-0-0-2-suValue-2-0-0-0-0-0-0-0-");
+        let propCom2 = nextProps.comVal;
         return { tbody: propCom2 };
       }
     }
@@ -232,9 +235,11 @@ class TableBody extends Component {
 
     return (
       <tbody>
-        {this.state.tbody.length > 0
-          ? this.Loading(this.state.tbody)
-          : template()}
+        {this.state.tbody
+          ? this.state.tbody.length > 0
+            ? this.Loading(this.state.tbody)
+            : template()
+          : "false"}
         {/* {JSON.stringify(this.props.comVal)} */}
       </tbody>
     );

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Autosuggest from "react-autosuggest";
 import { connect } from "react-redux";
 import {
   SUGG_VALUE,
@@ -57,6 +56,8 @@ class TSearch extends React.Component {
       comVal: this.props.comVal,
       TSvalue: this.props.TSvalue
     };
+    this.onChange = this.onChange.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
   }
 
   settingState = (set) => {
@@ -99,98 +100,67 @@ class TSearch extends React.Component {
     // }
   }
 
-  shouldComponentUpdate(prevState, nextProps) {
-    console.log("1-1-1-1-1shouldComponentUpdate!1-1-1-1-1");
-    // }
-    // this.dispatchEvent(new KeyboardEvent('keypress', {
-    //   key: 'Enter',
-    // }));
-    if (this.state.upTrValue) {
-      console.log("this.state.upTrValue");
-      console.log("this.state.comVal !== undefined");
-      console.log(this.state.comVal !== undefined);
-      console.log("this.state.TSvalue !== undefined");
-      console.log(this.state.TSvalue !== undefined);
-      console.log("this.state.TSvalue");
-      console.log(this.state.TSvalue);
+  // shouldComponentUpdate(prevState, nextProps) {
+  //   console.log("1-1-1-1-1shouldComponentUpdate!1-1-1-1-1");
+  //   // }
+  //   // this.dispatchEvent(new KeyboardEvent('keypress', {
+  //   //   key: 'Enter',
+  //   // }));
 
-      console.log("this.state.upTrValue !== undefined");
-      console.log(this.state.upTrValue !== undefined);
+  //   // if (this.state.upTrValue) {
+  //   //   if (
+  //   //     this.state.comVal !== undefined &&
+  //   //     this.state.TSvalue !== undefined &&
+  //   //     this.state.upTrValue !== undefined
+  //   //   ) {
+  //   //     console.log(
+  //   //       "this.props.suggVal(getSuggestions(this.props.TSvalue, this.state.comVal))"
+  //   //     );
 
-      if (
-        this.state.comVal !== undefined &&
-        this.state.TSvalue !== undefined &&
-        this.state.upTrValue !== undefined
-      ) {
-        console.log(
-          "this.props.suggVal(getSuggestions(this.props.TSvalue, this.state.comVal))"
-        );
+  //   //     // this.props.suggVal(
+  //   //     //   getSuggestions(this.props.TSvalue, this.state.comVal)
+  //   //     // );
 
-        // this.props.suggVal(
-        //   getSuggestions(this.props.TSvalue, this.state.comVal)
-        // );
-        Autosuggest.dispatchEvent(
-          new KeyboardEvent("keypress", {
-            key: "Enter"
-          })
-        );
-        this.props.changeUpdateTrValue();
+  //   //     this.props.changeUpdateTrValue();
+  //   //   }
+  //   // }
+
+  //   if (this.state.comVal) {
+  //     if (this.state.suValue !== []) {
+  //       // this.props.STSVal(t.target.value);
+  //       // this.props.suggVal(this.state.comVal);
+  //     }
+  //     console.log("new COMVAL");
+  //   }
+
+  //   //   return true;
+  //   // }
+  //   return true;
+  // }
+
+  onChange = (event) => {
+    // this.setState({
+    //   value: event.target.value.toString()
+    // });
+    this.props.STSVal(0);
+  };
+
+  onKeyDown = (event) => {
+    // onKeyUp(event) {
+    if (event.target !== undefined) {
+      if (event.keyCode === 13) {
+        // if (event.charCode === 13) {
+        this.props.STSVal(event.target.value);
+        this.props.suggVal(this.state.comVal);
+        console.log("this.props.suValue");
+        console.log(this.props.suValue);
+        console.log("DONE!!");
       }
     }
-
-    //   return true;
-    // }
-    return true;
-  }
-
-  onChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue.toString()
-    });
-  };
-
-  onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: getSuggestions(value, this.state.comVal)
-    });
-  };
-
-  onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
-    });
-  };
-
-  handleKeyDown = (event) => {
-    // onKeyUp(event) {
-    if (event.key === "Enter") {
-      // if (event.charCode === 13) {
-      this.props.STSVal(event.target.value);
-      this.props.suggVal(this.state.suggestions);
-    }
     // }
   };
-
   render() {
-    const { value, suggestions } = this.state;
-    const inputProps = {
-      placeholder: "Type 'c'",
-      value,
-      onChange: this.onChange,
-      onKeyDown: this.handleKeyDown
-    };
-
-    return (
-      <Autosuggest
-        id="optionalInput"
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-      />
-    );
+    return <input onChange={this.onChange} onKeyDown={this.onKeyDown} />;
   }
 }
 
