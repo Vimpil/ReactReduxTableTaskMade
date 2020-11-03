@@ -80,21 +80,21 @@ class TUpdate extends Component {
       // }
     }, 5000);
 
-    const timer2 = setTimeout((props) => {
-      console.log("timer");
-      this.props.makeTbody();
-      if (this.state.suValue !== 0) {
-        this.props.suggVal(this.state.comVal);
-      }
-    }, 10000);
+    // const timer2 = setTimeout((props) => {
+    //   console.log("timer");
+    //   this.props.makeTbody();
+    //   if (this.state.suValue !== 0) {
+    //     this.props.suggVal(this.state.comVal);
+    //   }
+    // }, 10000);
 
-    const timer3 = setTimeout((props) => {
-      console.log("timer");
-      this.props.makeTbody();
-      if (this.state.suValue !== 0) {
-        this.props.suggVal(this.state.comVal);
-      }
-    }, 15000);
+    // const timer3 = setTimeout((props) => {
+    //   console.log("timer");
+    //   this.props.makeTbody();
+    //   if (this.state.suValue !== 0) {
+    //     this.props.suggVal(this.state.comVal);
+    //   }
+    // }, 15000);
   }
 
   render() {

@@ -150,11 +150,13 @@ class TSearch extends React.Component {
     if (event.target !== undefined) {
       if (event.keyCode === 13) {
         // if (event.charCode === 13) {
-        this.props.STSVal(event.target.value);
-        this.props.suggVal(this.state.comVal);
-        console.log("this.props.suValue");
-        console.log(this.props.suValue);
-        console.log("DONE!!");
+        if (event.target.value !== "") {
+          this.props.STSVal(event.target.value);
+          this.props.suggVal(this.state.comVal);
+          console.log("this.props.suValue");
+          console.log(this.props.suValue);
+          console.log("DONE!!");
+        }
       }
     }
     // }

@@ -234,7 +234,11 @@ const commandReducer = (state = INITIAL_STATE, action) => {
             }
           });
         }
-        return sugArr;
+        if (sugArr.length > 0) {
+          return sugArr;
+        } else {
+          return 0;
+        }
       }
 
       console.log("SSSSSSSone");
