@@ -144,7 +144,7 @@ const commandReducer = (state = INITIAL_STATE, action) => {
         console.log("typeof needToFind");
         console.log(typeof needToFind);
 
-        if (isNumeric(needToFind)) {
+        if (isNumeric(needToFind) && needToFind.split(" ").length == 1) {
           console.log("comVal");
           console.log(action.payload);
           action.payload.forEach(function (entry) {
@@ -189,6 +189,47 @@ const commandReducer = (state = INITIAL_STATE, action) => {
             console.log(needToFind);
 
             if (entry.type.toString().toLowerCase().includes(needToFind)) {
+              sugArr.push(entry);
+            }
+          });
+        } else if (needToFind !== "") {
+          action.payload.forEach(function (entry) {
+            // if(entry.id.includes())
+            let parses = entry.address;
+            console.log("Durwardton 74276 Windler Trafficway");
+            let inside = "Durwardton 74276 Windler Trafficway"
+              .toLowerCase()
+              .includes(needToFind.toLowerCase());
+
+            console.log("inside");
+            console.log(inside);
+            console.log("***");
+            console.log("entry.address" + entry.address.toLowerCase());
+
+            console.log(
+              "entry.address" +
+                entry.address.toString().toLowerCase().toLowerCase()
+            );
+
+            console.log(
+              "entry.address INCLUDES" +
+                entry.address
+                  .toString()
+                  .toLowerCase()
+                  .toLowerCase()
+                  .includes(needToFind.toLowerCase())
+            );
+
+            console.log("***");
+
+            if (
+              entry.address
+                .toString()
+                .toLowerCase()
+                .includes(needToFind.toLowerCase())
+            ) {
+              console.log("THATS TRUE");
+              console.log("entry" + entry);
               sugArr.push(entry);
             }
           });
