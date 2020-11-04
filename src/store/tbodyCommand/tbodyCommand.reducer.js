@@ -216,7 +216,6 @@ const commandReducer = (state = INITIAL_STATE, action) => {
                 entry.address
                   .toString()
                   .toLowerCase()
-                  .toLowerCase()
                   .includes(needToFind.toLowerCase())
             );
 

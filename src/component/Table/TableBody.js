@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import {
   MAKE_TBODY,
   ISINFAV_VALUE,
-  UPDATETRIGGER_VALUE
+  UPDATETRIGGER_VALUE,
+  ORDER_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
 import {
@@ -146,14 +147,15 @@ class TableBody extends Component {
         }
       });
     }
+
     console.log("let promise");
     setTimeout(() => {
       console.log("Tbody");
       console.log(Tbody);
       console.log("tempVal");
       console.log(thisObj.props.comVal);
-      console.log("sortJSON(thisObj.props.comVal,id,true)");
-      console.log(sortJSON(thisObj.props.comVal, "id", true));
+      // console.log("sortJSON(thisObj.props.comVal,id,true)");
+      // console.log(sortJSON(thisObj.props.comVal, "id", true));
       let result = sortJSON(thisObj.props.comVal, "id", true);
       setStateAsync(thisObj, { tbody: result });
 
@@ -260,7 +262,9 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const mapDispatchToProps = () => (dispatch) => ({
   makeTbody: () => dispatch(MAKE_TBODY()),
   makeFav: (arrayvalue) => dispatch(ISINFAV_VALUE(arrayvalue)),
-  changeUpTr: () => dispatch(UPDATETRIGGER_VALUE())
+  changeUpTr: () => dispatch(UPDATETRIGGER_VALUE()),
+  setOrderVal: (ordvalue, arrayvalue) =>
+    dispatch(ORDER_VALUE(ordvalue, arrayvalue))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableBody);

@@ -4,7 +4,8 @@ import {
   MAKE_TBODY,
   TSEARCH_VALUE,
   UPDATETRIGGER_VALUE,
-  SUGG_VALUE
+  SUGG_VALUE,
+  ORDER_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
 import {
@@ -26,7 +27,8 @@ class TUpdate extends Component {
       tbody: this.props.tbody,
       TSvalue: this.props.TSvalue,
       upTrValue: this.props.upTrValue,
-      suggVal: this.props.suggVal
+      suggVal: this.props.suggVal,
+      ordValue: this.props.ordValue
     };
   }
 
@@ -73,21 +75,19 @@ class TUpdate extends Component {
       console.log("this.state.suValue");
       console.log(this.state.suValue);
       if (this.state.suValue !== 0) {
-        this.props.suggVal(this.state.comVal);
+        this.props.suggVal(this.state.comVal, this.state.ordValue);
       }
       // if (!this.state.upTrValue) {
       //   this.props.changeUpdateTrValue();
       // }
-    }, 5000);
-
-    // const timer2 = setTimeout((props) => {
-    //   console.log("timer");
-    //   this.props.makeTbody();
-    //   if (this.state.suValue !== 0) {
-    //     this.props.suggVal(this.state.comVal);
-    //   }
-    // }, 10000);
-
+    }, 1100);
+    const timer2 = setTimeout((props) => {
+      console.log("timer");
+      this.props.makeTbody();
+      if (this.state.suValue !== 0) {
+        this.props.suggVal(this.state.comVal, this.state.ordValue);
+      }
+    }, 10000);
     // const timer3 = setTimeout((props) => {
     //   console.log("timer");
     //   this.props.makeTbody();
@@ -114,7 +114,9 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = () => (dispatch) => ({
   suggVal: (arrayvalue) => dispatch(SUGG_VALUE(arrayvalue)),
   makeTbody: () => dispatch(MAKE_TBODY()),
-  changeUpdateTrValue: () => dispatch(UPDATETRIGGER_VALUE())
+  changeUpdateTrValue: () => dispatch(UPDATETRIGGER_VALUE()),
+  setOrderVal: (ordvalue, arrayvalue) =>
+    dispatch(ORDER_VALUE(ordvalue, arrayvalue))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TUpdate);
