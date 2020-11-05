@@ -5,7 +5,8 @@ import {
   TSEARCH_VALUE,
   UPDATETRIGGER_VALUE,
   SUGG_VALUE,
-  ORDER_VALUE
+  ORDER_VALUE,
+  TBODY_ASCDESC
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
 import {
@@ -115,8 +116,8 @@ const mapDispatchToProps = () => (dispatch) => ({
   suggVal: (arrayvalue) => dispatch(SUGG_VALUE(arrayvalue)),
   makeTbody: () => dispatch(MAKE_TBODY()),
   changeUpdateTrValue: () => dispatch(UPDATETRIGGER_VALUE()),
-  setOrderVal: (ordvalue, arrayvalue) =>
-    dispatch(ORDER_VALUE(ordvalue, arrayvalue))
+  setOrderVal: (ordvalue, arrayvalue, ascdesc) =>
+    dispatch(ORDER_VALUE(ordvalue, arrayvalue, ascdesc))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TUpdate);

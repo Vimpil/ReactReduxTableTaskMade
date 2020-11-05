@@ -86,10 +86,10 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       let sortedArr = sortJSON(
         action.array,
         action.payload.toLowerCase(),
-        state.ascdescVal
+        action.ascdesc
       );
       console.log("state.ascdescVal");
-      console.log(state.ascdescVal);
+      console.log(action.ascdesc);
       console.log("tempconsole.log(temp);console.log(temp);console.log(temp);");
 
       if (state.suValue === 0) {
@@ -97,14 +97,14 @@ const commandReducer = (state = INITIAL_STATE, action) => {
           ...state,
           comVal: sortedArr,
           ordValue: action.payload,
-          ascdescVal: !state.ascdescVal
+          ascdescVal: action.ascdesc
         };
       } else {
         return {
           ...state,
           suValue: sortedArr,
           ordValue: action.payload,
-          ascdescVal: !state.ascdescVal
+          ascdescVal: action.ascdesc
         };
       }
 

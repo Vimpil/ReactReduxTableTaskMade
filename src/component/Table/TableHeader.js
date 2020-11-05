@@ -57,9 +57,17 @@ class TableRowHeaderMap extends Component {
             console.log("this.props.comval");
             console.log(this.props.comVal);
             if (this.props.suValue === 0) {
-              this.props.setOrderVal(number.id, this.props.comVal);
+              this.props.setOrderVal(
+                number.id,
+                this.props.comVal,
+                !this.state.ascdescVal
+              );
             } else {
-              this.props.setOrderVal(number.id, this.props.suValue);
+              this.props.setOrderVal(
+                number.id,
+                this.props.suValue,
+                !this.state.ascdescVal
+              );
             }
           }}
           type="button"
@@ -93,8 +101,8 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   // changeAscTbody: (ascDescValue) => dispatch(TBODY_ASCDESC(ascDescValue)),
 
-  setOrderVal: (ordvalue, arrayvalue) =>
-    dispatch(ORDER_VALUE(ordvalue, arrayvalue))
+  setOrderVal: (ordvalue, arrayvalue, ascdesc) =>
+    dispatch(ORDER_VALUE(ordvalue, arrayvalue, ascdesc))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableRowHeaderMap);
