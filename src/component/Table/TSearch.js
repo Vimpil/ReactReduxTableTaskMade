@@ -93,7 +93,12 @@ class TSearch extends React.Component {
   }
 
   onChange = (event) => {
-    this.props.STSVal(0);
+    if(event.target.value!=="") {
+      this.props.STSVal(event.target.value);
+      this.props.suggVal(this.state.comVal);
+    }else{
+      this.props.STSVal(0);
+    }
   };
 
   onKeyDown = (event) => {

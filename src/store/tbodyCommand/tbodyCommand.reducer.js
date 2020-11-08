@@ -105,42 +105,47 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       let input = state.TSValue;
 
     function compare(needToFind) {
-      if (isNumeric(needToFind) && needToFind.split(" ").length == 1) {
-        action.payload.forEach(function (entry) {
-          let parses = entry.id;
-          let inside = "1001".includes(needToFind);
-          if (entry.id.toString().includes(needToFind)) {
-            sugArr.push(entry);
-          }
-        });
-      } else if (
-          needToFind.toLowerCase() === "home" ||
-          needToFind.toLowerCase() === "condo"
-      ) {
-        action.payload.forEach(function (entry) {
-          let parses = entry.type;
-          let inside = "home".includes(needToFind);
+      console.log("needToFind.split().length !!"+needToFind.toString().split("").length);
+      if (needToFind !== 0) {
+        console.log("needToFind"+needToFind)
+        console.log("needToFind.split().length"+needToFind.toString().split(" ").length);
+        if (isNumeric(needToFind)) {
+          action.payload.forEach(function (entry) {
+            let parses = entry.id;
+            let inside = "1001".includes(needToFind);
+            if (entry.id.toString().includes(needToFind)) {
+              sugArr.push(entry);
+            }
+          });
+        } else if (
+            needToFind.toString().toLowerCase() === "home" ||
+            needToFind.toString().toLowerCase() === "condo"
+        ) {
+          action.payload.forEach(function (entry) {
+            let parses = entry.type;
+            let inside = "home".includes(needToFind);
 
-          if (entry.type.toString().toLowerCase().includes(needToFind)) {
-            sugArr.push(entry);
-          }
-        });
-      } else if (needToFind !== "") {
-        action.payload.forEach(function (entry) {
-          let parses = entry.address;
-          let inside = "Durwardton 74276 Windler Trafficway"
-              .toLowerCase()
-              .includes(needToFind.toLowerCase());
+            if (entry.type.toString().toLowerCase().includes(needToFind)) {
+              sugArr.push(entry);
+            }
+          });
+        } else {
+          action.payload.forEach(function (entry) {
+            let parses = entry.address;
+            // let inside = "Durwardton 74276 Windler Trafficway"
+            //     .toLowerCase()
+            //     .includes(needToFind.toLowerCase());
 
-          if (
-              entry.address
-                  .toString()
-                  .toLowerCase()
-                  .includes(needToFind.toLowerCase())
-          ) {
-            sugArr.push(entry);
-          }
-        });
+            if (
+                entry.address
+                    .toString()
+                    .toLowerCase()
+                    .includes(needToFind.toLowerCase())
+            ) {
+              sugArr.push(entry);
+            }
+          });
+        }
       }
       if (sugArr.length > 0) {
         return sugArr;

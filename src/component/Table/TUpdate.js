@@ -88,7 +88,6 @@ class TUpdate extends Component {
           this.state.ascdescVal
       );
      if (this.state.suValue !== 0) {
-
        this.props.suggVal(this.state.comVal);
      }
       this.props.changeUpdateTrValue();
