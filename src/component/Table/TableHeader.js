@@ -48,14 +48,10 @@ class TableRowHeaderMap extends Component {
       { name: "Type", id: "Type" },
       { name: "Is in favorite", id: "love" }
     ];
-    // console.log(this.props.ascTbody("as"));
     const HEAD_NAMES = head_names.map((number, index) => (
       <th key={index}>
         <button
           onClick={() => {
-            // this.props.changeAscTbody();
-            console.log("this.props.comval");
-            console.log(this.props.comVal);
             if (this.props.suValue === 0) {
               this.props.setOrderVal(
                 number.id,
@@ -99,8 +95,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // changeAscTbody: (ascDescValue) => dispatch(TBODY_ASCDESC(ascDescValue)),
-
   setOrderVal: (ordvalue, arrayvalue, ascdesc) =>
     dispatch(ORDER_VALUE(ordvalue, arrayvalue, ascdesc))
 });

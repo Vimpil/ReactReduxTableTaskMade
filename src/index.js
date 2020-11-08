@@ -9,14 +9,6 @@ import App from "./App";
 
 let store = createStore(reducer);
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <Header />
-//     </div>
-//   );
-// }
-
 const rootElement = document.getElementById("root");
 
 ReactDOM.render(

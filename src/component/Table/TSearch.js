@@ -74,8 +74,6 @@ class TSearch extends React.Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.comVal !== prevState.comVal) {
-      // settingState(nextProps);
-      console.log("-0-0-0-0-0-0-0-0-getDerivedStateFromProps-0-0-0-0-0-0-0-0-");
       let propCom = nextProps.comVal;
       let propCom2 = nextProps.suValue;
       return { comVal: propCom, suValue: propCom2 };
@@ -92,74 +90,21 @@ class TSearch extends React.Component {
       let propCom = nextProps.upTrValue;
       return { upTrValue: propCom };
     }
-    // if (nextProps.upTrValue !== prevState.upTrValue) {
-    //   let propCom = nextProps.upTrValue;
-    //   return { upTrValue: propCom };
-    // } else {
-    //   return { upTrValue: undefined };
-    // }
   }
 
-  // shouldComponentUpdate(prevState, nextProps) {
-  //   console.log("1-1-1-1-1shouldComponentUpdate!1-1-1-1-1");
-  //   // }
-  //   // this.dispatchEvent(new KeyboardEvent('keypress', {
-  //   //   key: 'Enter',
-  //   // }));
-
-  //   // if (this.state.upTrValue) {
-  //   //   if (
-  //   //     this.state.comVal !== undefined &&
-  //   //     this.state.TSvalue !== undefined &&
-  //   //     this.state.upTrValue !== undefined
-  //   //   ) {
-  //   //     console.log(
-  //   //       "this.props.suggVal(getSuggestions(this.props.TSvalue, this.state.comVal))"
-  //   //     );
-
-  //   //     // this.props.suggVal(
-  //   //     //   getSuggestions(this.props.TSvalue, this.state.comVal)
-  //   //     // );
-
-  //   //     this.props.changeUpdateTrValue();
-  //   //   }
-  //   // }
-
-  //   if (this.state.comVal) {
-  //     if (this.state.suValue !== []) {
-  //       // this.props.STSVal(t.target.value);
-  //       // this.props.suggVal(this.state.comVal);
-  //     }
-  //     console.log("new COMVAL");
-  //   }
-
-  //   //   return true;
-  //   // }
-  //   return true;
-  // }
-
   onChange = (event) => {
-    // this.setState({
-    //   value: event.target.value.toString()
-    // });
     this.props.STSVal(0);
   };
 
   onKeyDown = (event) => {
-    // onKeyUp(event) {
     if (event.target !== undefined) {
       if (event.keyCode === 13) {
-        // if (event.charCode === 13) {
         if (event.target.value !== "") {
           this.props.STSVal(event.target.value);
           this.props.suggVal(this.state.comVal);
-          console.log("this.props.suValue");
-          console.log(this.props.suValue);
-          console.log("DONE!!");
         }
       }
     }
-    // }
   };
   render() {
     return <input onChange={this.onChange} onKeyDown={this.onKeyDown} />;

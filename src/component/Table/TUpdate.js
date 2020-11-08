@@ -65,37 +65,43 @@ class TUpdate extends Component {
         obj.upTrValue = propCom;
       }
 
+      if (nextProps.ascdescVal !== prevState.ascdescVal) {
+        let propCom = nextProps.ascdescVal;
+        obj.ascdescVal = propCom;
+      }
+
+      if (nextProps.ordValue !== prevState.ordValue) {
+        let propCom = nextProps.ordValue;
+        obj.ordValue = propCom;
+      }
+
       return obj;
     }
   }
 
   componentDidMount() {
-    const timer = setTimeout((props) => {
-      console.log("timer");
-      this.props.makeTbody();
-      console.log("this.state.suValue");
-      console.log(this.state.suValue);
-      if (this.state.suValue !== 0) {
-        this.props.suggVal(this.state.comVal, this.state.ordValue);
-      }
-      // if (!this.state.upTrValue) {
-      //   this.props.changeUpdateTrValue();
+    const timer = setInterval((props) => {
+     this.props.makeTbody();
+      this.props.setOrderVal(
+          this.state.ordValue,
+          this.state.comVal,
+          this.state.ascdescVal
+      );
+     if (this.state.suValue !== 0) {
+
+       this.props.suggVal(this.state.comVal);
+     }
+      this.props.changeUpdateTrValue();
+      // if (this.state.suValue !== 0) {
+      //   this.props.suggVal(this.state.comVal);
       // }
-    }, 1100);
-    const timer2 = setTimeout((props) => {
-      console.log("timer");
-      this.props.makeTbody();
-      if (this.state.suValue !== 0) {
-        this.props.suggVal(this.state.comVal, this.state.ordValue);
-      }
-    }, 10000);
-    // const timer3 = setTimeout((props) => {
-    //   console.log("timer");
+    }, 2000);
+    // const timer2 = setTimeout((props) => {
     //   this.props.makeTbody();
     //   if (this.state.suValue !== 0) {
-    //     this.props.suggVal(this.state.comVal);
+    //     this.props.suggVal(this.state.comVal, this.state.ordValue);
     //   }
-    // }, 15000);
+    // }, 10000);
   }
 
   render() {
@@ -117,7 +123,7 @@ const mapDispatchToProps = () => (dispatch) => ({
   makeTbody: () => dispatch(MAKE_TBODY()),
   changeUpdateTrValue: () => dispatch(UPDATETRIGGER_VALUE()),
   setOrderVal: (ordvalue, arrayvalue, ascdesc) =>
-    dispatch(ORDER_VALUE(ordvalue, arrayvalue, ascdesc))
+      dispatch(ORDER_VALUE(ordvalue, arrayvalue, ascdesc))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TUpdate);

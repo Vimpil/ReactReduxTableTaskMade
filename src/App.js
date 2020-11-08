@@ -15,24 +15,9 @@ class App extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    // console.log("update");
-    // console.log("type props.comVal" + prevProps.comVal);
-    // console.log("type props.comVal" + JSON.stringify(this.props.comVal));
-  }
+  componentDidUpdate(prevProps) {}
 
-  // componentWillReceiveProps(nextProps, nextContext) {
-  //   console.log("APPcomponentWillReceiveProps getting props");
-  //   console.log("APPnextContext" + JSON.stringify(nextContext));
-  //   console.log("APPnextProps" + nextProps);
-  // }
-
-  componentDidMount() {
-    // console.log("this.props.loadTableFirstly()");
-    // console.log(this.props.loadTableFirstly());
-    // console.log(this.props.comVal);
-    // console.log("END /*  */this.props.loadTableFirstly()");
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -50,7 +35,5 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   loadTableFirstly: () => dispatch(MAKE_TBODY())
 });
-
-// makeTbody: (username) => dispatch(MAKE_TBODY(username))
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
