@@ -30,6 +30,12 @@ export const selectSuValue = createSelector(
   (suValue) => suValue.suValue
 );
 
+const selectHintSug = (state) => state.hintSuValue;
+export const selectHintSuValue = createSelector(
+    [selectHintSug],
+    (hintSuValue) => hintSuValue.hintSuValue
+);
+
 const selectTs = (state) => state.TSValue;
 export const selectTsValue = createSelector(
   [selectTs],

@@ -26,6 +26,11 @@ export const SUGG_VALUE = (array) => ({
   payload: array
 });
 
+export const HINT_SUGG_VALUE = (array) => ({
+  type: tbodyCommandTypes.HINT_SUGG_VALUE,
+  payload: array
+});
+
 export const TSEARCH_VALUE = (searchTerm) => ({
   type: tbodyCommandTypes.TSEARCH_VALUE,
   payload: searchTerm

@@ -54,25 +54,22 @@ class TUpdate extends Component {
       }
 
       if (nextProps.comVal !== prevState.comVal) {
-        let propCom = nextProps.comVal;
 
-        obj.comVal = propCom;
-        obj.tbody = propCom;
+
+        obj.comVal = nextProps.comVal;
+        obj.tbody = nextProps.comVal;
       }
 
       if (nextProps.upTrValue !== prevState.upTrValue) {
-        let propCom = nextProps.upTrValue;
-        obj.upTrValue = propCom;
+        obj.upTrValue = nextProps.upTrValue;
       }
 
       if (nextProps.ascdescVal !== prevState.ascdescVal) {
-        let propCom = nextProps.ascdescVal;
-        obj.ascdescVal = propCom;
+        obj.ascdescVal = obj.ascdescVal;
       }
 
       if (nextProps.ordValue !== prevState.ordValue) {
-        let propCom = nextProps.ordValue;
-        obj.ordValue = propCom;
+        obj.ordValue = nextProps.ordValue;
       }
 
       return obj;
@@ -81,15 +78,15 @@ class TUpdate extends Component {
 
   componentDidMount() {
     const timer = setInterval((props) => {
-     this.props.makeTbody();
+      this.props.makeTbody();
       this.props.setOrderVal(
           this.state.ordValue,
           this.state.comVal,
           this.state.ascdescVal
       );
-     if (this.state.suValue !== 0) {
-       this.props.suggVal(this.state.comVal);
-     }
+      if (this.state.suValue !== 0) {
+        this.props.suggVal(this.state.comVal);
+      }
       this.props.changeUpdateTrValue();
       // if (this.state.suValue !== 0) {
       //   this.props.suggVal(this.state.comVal);

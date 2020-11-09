@@ -3,14 +3,16 @@ import { connect } from "react-redux";
 import {
   SUGG_VALUE,
   TSEARCH_VALUE,
-  UPDATETRIGGER_VALUE
+  UPDATETRIGGER_VALUE,
+  HINT_SUGG_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
 import {
   selectCommandValue,
   selectSuValue,
   selectTsValue,
-  selectUpTrValue
+  selectUpTrValue,
+  selectHintSuValue
 } from "./../../store/tbodyCommand/tbodyCommand.selector";
 
 const languages = [];
@@ -23,25 +25,25 @@ const getSuggestions = (value, source) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
   return inputLength === 0
-    ? []
-    : source.filter(
-        (lang) =>
-          lang.id.toString().slice(0, inputLength) === inputValue ||
-          lang.address.toString().toLowerCase().slice(0, inputLength) ===
-            inputValue.toLowerCase() ||
-          lang.type.toString().toLowerCase().slice(0, inputLength) ===
-            inputValue.toLowerCase()
+      ? []
+      : source.filter(
+          (lang) =>
+              lang.id.toString().slice(0, inputLength) === inputValue ||
+              lang.address.toString().toLowerCase().slice(0, inputLength) ===
+              inputValue.toLowerCase() ||
+              lang.type.toString().toLowerCase().slice(0, inputLength) ===
+              inputValue.toLowerCase()
       );
 };
 
 const getSuggestionValue = (suggestion) => suggestion.id;
 
 const renderSuggestion = (suggestion) => (
-  <>
-    <td>
-      {suggestion.id} {suggestion.address}
-    </td>
-  </>
+    <>
+      <td>
+        {suggestion.id} {suggestion.address}
+      </td>
+    </>
 );
 
 class TSearch extends React.Component {
@@ -54,7 +56,8 @@ class TSearch extends React.Component {
       suValue: 0,
       upTrValue: this.props.upTrValue,
       comVal: this.props.comVal,
-      TSvalue: this.props.TSvalue
+      TSvalue: this.props.TSvalue,
+      hintSuValue: this.props.hintSuValue
     };
     this.onChange = this.onChange.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
@@ -73,37 +76,97 @@ class TSearch extends React.Component {
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.comVal !== prevState.comVal) {
-      let propCom = nextProps.comVal;
-      let propCom2 = nextProps.suValue;
-      return { comVal: propCom, suValue: propCom2 };
+    if (nextProps) {
+      // let obj = {};
+      // if (nextProps.upTrValue !== prevState.upTrValue) {
+      //   obj.upTrValue = nextProps.upTrValue;
+      // }
+      // if (nextProps.comVal !== prevState.comVal) {
+      //   obj.comval = nextProps.comVal;
+      //   obj.suValue = nextProps.suValue;
+      // }
+      // if (nextProps.suValue !== prevState.suValue) {
+      //   obj.suValue = nextProps.suValue;
+      // }
+      // if (nextProps.TSvalue !== prevState.TSvalue) {
+      //   obj.TSvalue = nextProps.TSvalue;
+      // }
+      // if (nextProps.hintSuValue !== prevState.hintSuValue) {
+      //   obj.hintSuValue = nextProps.hintSuValue;
+      // }
+      //
+      // // console.log("OBJOBJOBJOBJOBJOBJOBJOBJOBJOBJOBJOBJOBJOBJ");
+      // // console.log(JSON.stringify(obj));
+      // // console.log("OBJOBJOBJOBJOBJOBJOBJOBJOBJOBJOBJOBJOBJOBJ");
+      // return obj;
+
+
+      // if (nextProps.hintSuValue !== prevState.hintSuValue) {
+      //   let propCom = nextProps.hintSuValue;
+      //   return { hintSuValue: propCom };
+      // }
+      // if (nextProps.comVal !== prevState.comVal) {
+      //   let propCom = nextProps.comVal;
+      //   let propCom2 = nextProps.suValue;
+      //   return { comVal: propCom, suValue: propCom2 };
+      // }
+      // if (nextProps.suValue !== prevState.suValue) {
+      //   let propCom = nextProps.suValue;
+      //   return { suValue: propCom };
+      // }
+      // if (nextProps.TSvalue !== prevState.TSvalue) {
+      //   let propCom = nextProps.TSvalue;
+      //   return { TSvalue: propCom };
+      // }
+      // if (nextProps.upTrValue !== prevState.upTrValue) {
+      //   let propCom = nextProps.upTrValue;
+      //   return { upTrValue: propCom };
+      // }
+
+
+      if (nextProps.comVal !== prevState.comVal) {
+        let propCom = nextProps.comVal;
+        let propCom2 = nextProps.suValue;
+        return { comVal: propCom, suValue: propCom2 };
+      }
+      if (nextProps.suValue !== prevState.suValue) {
+        let propCom = nextProps.suValue;
+        return { suValue: propCom };
+      }
+      if (nextProps.TSvalue !== prevState.TSvalue) {
+        let propCom = nextProps.TSvalue;
+        return { TSvalue: propCom };
+      }
+      if (nextProps.hintSuValue !== prevState.hintSuValue) {
+        let propCom = nextProps.hintSuValue;
+        return { hintSuValue: propCom };
+      }
+      if (nextProps.upTrValue !== prevState.upTrValue) {
+        let propCom = nextProps.upTrValue;
+        return { upTrValue: propCom };
+      }
     }
-    if (nextProps.suValue !== prevState.suValue) {
-      let propCom = nextProps.suValue;
-      return { suValue: propCom };
-    }
-    if (nextProps.TSvalue !== prevState.TSvalue) {
-      let propCom = nextProps.TSvalue;
-      return { TSvalue: propCom };
-    }
-    if (nextProps.upTrValue !== prevState.upTrValue) {
-      let propCom = nextProps.upTrValue;
-      return { upTrValue: propCom };
-    }
+
   }
 
   onChange = (event) => {
+    console.log("***event.target.value***");
+    console.log(event.target.value);
+    console.log("***event.target.value***");
     if(event.target.value!=="") {
       this.props.STSVal(event.target.value);
-      this.props.suggVal(this.state.comVal);
+      // this.props.suggVal(this.state.comVal);
+      this.props.changeHintSuValue(this.state.comVal);
     }else{
       this.props.STSVal(0);
+
     }
   };
 
   onKeyDown = (event) => {
     if (event.target !== undefined) {
       if (event.keyCode === 13) {
+        console.log('ENTER');
         if (event.target.value !== "") {
           this.props.STSVal(event.target.value);
           this.props.suggVal(this.state.comVal);
@@ -112,7 +175,10 @@ class TSearch extends React.Component {
     }
   };
   render() {
-    return <input onChange={this.onChange} onKeyDown={this.onKeyDown} />;
+    return <><input onChange={this.onChange} onKeyDown={this.onKeyDown}/>
+      <div>{this.state.hintSuValue!==undefined ? JSON.stringify(this.state.hintSuValue) : null}</div>
+    </>;
+
   }
 }
 
@@ -120,13 +186,15 @@ const mapStateToProps = createStructuredSelector({
   comVal: selectCommandValue,
   suValue: selectSuValue,
   TSvalue: selectTsValue,
-  upTrValue: selectUpTrValue
+  upTrValue: selectUpTrValue,
+  hintSuValue: selectHintSuValue
 });
 
 const mapDispatchToProps = () => (dispatch) => ({
   suggVal: (arrayvalue) => dispatch(SUGG_VALUE(arrayvalue)),
   STSVal: (TSvalue) => dispatch(TSEARCH_VALUE(TSvalue)),
-  changeUpdateTrValue: () => dispatch(UPDATETRIGGER_VALUE())
+  changeUpdateTrValue: () => dispatch(UPDATETRIGGER_VALUE()),
+  changeHintSuValue: (arrayvalue) => dispatch(HINT_SUGG_VALUE(arrayvalue))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TSearch);

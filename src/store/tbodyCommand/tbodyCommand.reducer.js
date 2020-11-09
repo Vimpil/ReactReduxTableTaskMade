@@ -8,7 +8,8 @@ const INITIAL_STATE = {
   faValue: 0,
   suValue: 0,
   upTrValue: false,
-  TSValue: undefined
+  TSValue: undefined,
+  hintSuValue:[]
 };
 
 var row_temp = [];
@@ -172,6 +173,73 @@ const commandReducer = (state = INITIAL_STATE, action) => {
         ...state,
         upTrValue: notBool
       };
+
+     case tbodyCommandTypes.HINT_SUGG_VALUE:
+
+     function isNumeric2(str) {
+       if (typeof str != "string") return false; // we only process strings!
+       return (
+           !isNaN(str) && !isNaN(parseFloat(str)) // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+       ); // ...and ensure strings of whitespace fail
+     }
+       let sugArr2 = [];
+
+       let input2 = state.TSValue;
+
+     function compare2(needToFind2) {
+       console.log("needToFind2.split().length !!"+needToFind2.toString().split("").length);
+       if (needToFind2 !== 0) {
+         console.log("needToFind2"+needToFind2)
+         console.log("needToFind2.split().length"+needToFind2.toString().split(" ").length);
+         if (isNumeric2(needToFind2)) {
+           action.payload.forEach(function (entry) {
+             let parses = entry.id;
+             let inside = "1001".includes(needToFind2);
+             if (entry.id.toString().includes(needToFind2)) {
+               sugArr2.push(entry);
+             }
+           });
+         } else if (
+             needToFind2.toString().toLowerCase() === "home" ||
+             needToFind2.toString().toLowerCase() === "condo"
+         ) {
+           action.payload.forEach(function (entry) {
+             let parses = entry.type;
+             let inside = "home".includes(needToFind2);
+
+             if (entry.type.toString().toLowerCase().includes(needToFind2)) {
+               sugArr2.push(entry);
+             }
+           });
+         } else {
+           action.payload.forEach(function (entry) {
+             let parses = entry.address;
+             // let inside = "Durwardton 74276 Windler Trafficway"
+             //     .toLowerCase()
+             //     .includes(needToFind.toLowerCase());
+
+             if (
+                 entry.address
+                     .toString()
+                     .toLowerCase()
+                     .includes(needToFind2.toLowerCase())
+             ) {
+               sugArr2.push(entry);
+             }
+           });
+         }
+       }
+       if (sugArr2.length > 0) {
+         return sugArr2;
+       } else {
+         return 0;
+       }
+     }
+
+       return {
+         ...state,
+         hintSuValue: compare2(input2)
+       };
 
     default:
       return state;

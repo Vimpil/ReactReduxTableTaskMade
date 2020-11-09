@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import {
   MAKE_TBODY,
   ISINFAV_VALUE,
-  UPDATETRIGGER_VALUE
+  UPDATETRIGGER_VALUE,
+
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
 import {

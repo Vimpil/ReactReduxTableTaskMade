@@ -8,5 +8,6 @@ export default combineReducers({
   faValue: tbodyReducer,
   suValue: tbodyReducer,
   TSValue: tbodyReducer,
-  upTrValue: tbodyReducer
+  upTrValue: tbodyReducer,
+  hintSuValue: tbodyReducer
 });
