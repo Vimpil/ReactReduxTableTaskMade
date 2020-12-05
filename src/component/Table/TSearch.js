@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import {
   SUGG_VALUE,
@@ -7,6 +7,7 @@ import {
   HINT_SUGG_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
+import onClickOutside from "react-onclickoutside";
 import {
   selectCommandValue,
   selectSuValue,
@@ -74,6 +75,8 @@ class TSearch extends React.Component {
       suggestions: set
     });
   };
+
+
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps) {
@@ -174,9 +177,19 @@ class TSearch extends React.Component {
       }
     }
   };
+
+  handleClickOutside = event => {
+    // if (this && !this.contains(event.target)) {
+      console.log("outside")
+      // setIsComponentVisible(false);
+    // }
+  };
+
+
+
   render() {
-    return <><input onChange={this.onChange} onKeyDown={this.onKeyDown}/>
-      <div>{this.state.hintSuValue!==undefined ? JSON.stringify(this.state.hintSuValue) : null}</div>
+    return <><input onChange={this.onChange} onKeyDown={this.onKeyDown} handleClickOutside={this.handleClickOutside}/>
+      <div id="hints">{this.state.hintSuValue!==undefined ? JSON.stringify(this.state.hintSuValue) : null}</div>
     </>;
 
   }
@@ -197,5 +210,5 @@ const mapDispatchToProps = () => (dispatch) => ({
   changeHintSuValue: (arrayvalue) => dispatch(HINT_SUGG_VALUE(arrayvalue))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(onClickOutside(TSearch));
 // updating uptrvalue no cahnges why

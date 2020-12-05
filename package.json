@@ -14,7 +14,8 @@
     "redux": "4.0.4",
     "reselect": "4.0.0",
     "rxjs": "5.0.0",
-    "rxjs-compat": "6.0.0-uncanny-rc.7"
+    "rxjs-compat": "6.0.0-uncanny-rc.7",
+    "react-onclickoutside": "6.9.0"
   },
   "devDependencies": {
     "typescript": "3.3.3"
