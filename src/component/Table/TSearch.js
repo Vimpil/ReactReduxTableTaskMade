@@ -4,7 +4,8 @@ import {
   SUGG_VALUE,
   TSEARCH_VALUE,
   UPDATETRIGGER_VALUE,
-  HINT_SUGG_VALUE
+  HINT_SUGG_VALUE,
+  UPDATEHINT_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
 import onClickOutside from "react-onclickoutside";
@@ -13,7 +14,8 @@ import {
   selectSuValue,
   selectTsValue,
   selectUpTrValue,
-  selectHintSuValue
+  selectHintSuValue,
+  selectHintValue
 } from "./../../store/tbodyCommand/tbodyCommand.selector";
 
 const languages = [];
@@ -58,7 +60,8 @@ class TSearch extends React.Component {
       upTrValue: this.props.upTrValue,
       comVal: this.props.comVal,
       TSvalue: this.props.TSvalue,
-      hintSuValue: this.props.hintSuValue
+      hintSuValue: this.props.hintSuValue,
+      hide: true
     };
     this.onChange = this.onChange.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
@@ -75,8 +78,6 @@ class TSearch extends React.Component {
       suggestions: set
     });
   };
-
-
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps) {
@@ -103,7 +104,6 @@ class TSearch extends React.Component {
       // // console.log("OBJOBJOBJOBJOBJOBJOBJOBJOBJOBJOBJOBJOBJOBJ");
       // return obj;
 
-
       // if (nextProps.hintSuValue !== prevState.hintSuValue) {
       //   let propCom = nextProps.hintSuValue;
       //   return { hintSuValue: propCom };
@@ -126,10 +126,10 @@ class TSearch extends React.Component {
       //   return { upTrValue: propCom };
       // }
 
-
       if (nextProps.comVal !== prevState.comVal) {
         let propCom = nextProps.comVal;
         let propCom2 = nextProps.suValue;
+        // if (!this.state.hide){}
         return { comVal: propCom, suValue: propCom2 };
       }
       if (nextProps.suValue !== prevState.suValue) {
@@ -149,27 +149,27 @@ class TSearch extends React.Component {
         return { upTrValue: propCom };
       }
     }
-
   }
 
   onChange = (event) => {
+    this.props.changeHintValue(true);
+    this.setState({ hide: false });
     console.log("***event.target.value***");
     console.log(event.target.value);
     console.log("***event.target.value***");
-    if(event.target.value!=="") {
+    if (event.target.value !== "") {
       this.props.STSVal(event.target.value);
       // this.props.suggVal(this.state.comVal);
       this.props.changeHintSuValue(this.state.comVal);
-    }else{
+    } else {
       this.props.STSVal(0);
-
     }
   };
 
   onKeyDown = (event) => {
     if (event.target !== undefined) {
       if (event.keyCode === 13) {
-        console.log('ENTER');
+        console.log("ENTER");
         if (event.target.value !== "") {
           this.props.STSVal(event.target.value);
           this.props.suggVal(this.state.comVal);
@@ -178,20 +178,41 @@ class TSearch extends React.Component {
     }
   };
 
-  handleClickOutside = event => {
+  handleClickOutside = (event) => {
     // if (this && !this.contains(event.target)) {
-      console.log("outside")
-      // setIsComponentVisible(false);
+    this.props.changeHintValue(false);
+    console.log("outside");
+    this.setState({ hide: true });
+
+    // setIsComponentVisible(false);
     // }
   };
 
-
+  getStyle = () => {
+    if (this.state.hide) {
+      return { display: "none" };
+    } else {
+      return { display: "block" };
+    }
+  };
 
   render() {
-    return <><input onChange={this.onChange} onKeyDown={this.onKeyDown} handleClickOutside={this.handleClickOutside}/>
-      <div id="hints">{this.state.hintSuValue!==undefined ? JSON.stringify(this.state.hintSuValue) : null}</div>
-    </>;
+    var hintsStyle = "display:none";
 
+    return (
+        <>
+          <input
+              onChange={this.onChange}
+              onKeyDown={this.onKeyDown}
+              handleClickOutside={this.handleClickOutside}
+          />
+          <div id="hints" style={this.getStyle()}>
+            {this.state.hintSuValue !== undefined
+                ? JSON.stringify(this.state.hintSuValue)
+                : null}
+          </div>
+        </>
+    );
   }
 }
 
@@ -200,15 +221,20 @@ const mapStateToProps = createStructuredSelector({
   suValue: selectSuValue,
   TSvalue: selectTsValue,
   upTrValue: selectUpTrValue,
-  hintSuValue: selectHintSuValue
+  hintSuValue: selectHintSuValue,
+  hintValue: selectHintValue
 });
 
 const mapDispatchToProps = () => (dispatch) => ({
   suggVal: (arrayvalue) => dispatch(SUGG_VALUE(arrayvalue)),
   STSVal: (TSvalue) => dispatch(TSEARCH_VALUE(TSvalue)),
   changeUpdateTrValue: () => dispatch(UPDATETRIGGER_VALUE()),
-  changeHintSuValue: (arrayvalue) => dispatch(HINT_SUGG_VALUE(arrayvalue))
+  changeHintSuValue: (arrayvalue) => dispatch(HINT_SUGG_VALUE(arrayvalue)),
+  changeHintValue: (boolvalue) => dispatch(UPDATEHINT_VALUE(boolvalue))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(onClickOutside(TSearch));
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(onClickOutside(TSearch));
 // updating uptrvalue no cahnges why

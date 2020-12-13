@@ -1,8 +1,9 @@
 import { tbodyCommandTypes } from "./tbodyCommand.types";
 
-export const MAKE_TBODY = (boolean) => ({
+export const MAKE_TBODY = () => ({
+  // boolean
   type: tbodyCommandTypes.MAKE_TBODY
-  payload: boolean
+  // payload: boolean
 });
 
 export const TBODY_ASCDESC = () => ({
@@ -38,4 +39,8 @@ export const TSEARCH_VALUE = (searchTerm) => ({
 
 export const UPDATETRIGGER_VALUE = () => ({
   type: tbodyCommandTypes.UPDATETRIGGER_VALUE
+});
+export const UPDATEHINT_VALUE = (boolean) => ({
+  type: tbodyCommandTypes.UPDATEHINT_VALUE,
+  payload: boolean
 });

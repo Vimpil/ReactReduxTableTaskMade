@@ -6,7 +6,9 @@ import {
   UPDATETRIGGER_VALUE,
   SUGG_VALUE,
   ORDER_VALUE,
-  TBODY_ASCDESC
+  TBODY_ASCDESC,
+  HINT_SUGG_VALUE,
+  UPDATEHINT_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
 import {
@@ -15,7 +17,9 @@ import {
   selectAscValue,
   selectSuValue,
   selectTsValue,
-  selectUpTrValue
+  selectUpTrValue,
+  selectHintSuValue,
+  selectHintValue
 } from "./../../store/tbodyCommand/tbodyCommand.selector";
 
 class TUpdate extends Component {
@@ -29,7 +33,8 @@ class TUpdate extends Component {
       TSvalue: this.props.TSvalue,
       upTrValue: this.props.upTrValue,
       suggVal: this.props.suggVal,
-      ordValue: this.props.ordValue
+      ordValue: this.props.ordValue,
+      hintValue: this.props.hintValue
     };
   }
 
@@ -54,8 +59,6 @@ class TUpdate extends Component {
       }
 
       if (nextProps.comVal !== prevState.comVal) {
-
-
         obj.comVal = nextProps.comVal;
         obj.tbody = nextProps.comVal;
       }
@@ -72,6 +75,10 @@ class TUpdate extends Component {
         obj.ordValue = nextProps.ordValue;
       }
 
+      if (nextProps.hintValue !== prevState.hintValue) {
+        obj.hintValue = nextProps.hintValue;
+      }
+
       return obj;
     }
   }
@@ -86,6 +93,9 @@ class TUpdate extends Component {
       );
       if (this.state.suValue !== 0) {
         this.props.suggVal(this.state.comVal);
+      }
+      if (this.state.hintValue) {
+        this.props.changeHintSuValue(this.state.comVal);
       }
       this.props.changeUpdateTrValue();
       // if (this.state.suValue !== 0) {
@@ -111,7 +121,9 @@ const mapStateToProps = createStructuredSelector({
   ascdescVal: selectAscValue,
   suValue: selectSuValue,
   TSvalue: selectTsValue,
-  upTrValue: selectUpTrValue
+  upTrValue: selectUpTrValue,
+  hintValue: selectHintValue,
+  hintSuValue: selectHintSuValue
 });
 
 const mapDispatchToProps = () => (dispatch) => ({
@@ -119,7 +131,9 @@ const mapDispatchToProps = () => (dispatch) => ({
   makeTbody: () => dispatch(MAKE_TBODY()),
   changeUpdateTrValue: () => dispatch(UPDATETRIGGER_VALUE()),
   setOrderVal: (ordvalue, arrayvalue, ascdesc) =>
-      dispatch(ORDER_VALUE(ordvalue, arrayvalue, ascdesc))
+      dispatch(ORDER_VALUE(ordvalue, arrayvalue, ascdesc)),
+  changeHintValue: (boolvalue) => dispatch(UPDATEHINT_VALUE(boolvalue)),
+  changeHintSuValue: (arrayvalue) => dispatch(HINT_SUGG_VALUE(arrayvalue))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TUpdate);

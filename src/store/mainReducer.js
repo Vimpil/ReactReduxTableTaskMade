@@ -9,5 +9,6 @@ export default combineReducers({
   suValue: tbodyReducer,
   TSValue: tbodyReducer,
   upTrValue: tbodyReducer,
-  hintSuValue: tbodyReducer
+  hintSuValue: tbodyReducer,
+  hintValue: tbodyReducer
 });

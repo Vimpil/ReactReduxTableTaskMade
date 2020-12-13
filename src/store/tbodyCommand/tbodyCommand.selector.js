@@ -48,4 +48,11 @@ export const selectUpTrValue = createSelector(
   (upTrValue) => upTrValue.upTrValue
 );
 
-// ORDER_VALUE
+const selectHint = (state) => state.hintValue;
+export const selectHintValue = createSelector(
+    [selectHint],
+    (hintValue) => hintValue.hintValue
+);
+
+
+// UPDATEHINT_VALUE
