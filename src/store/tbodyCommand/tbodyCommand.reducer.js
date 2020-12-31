@@ -5,12 +5,12 @@ const INITIAL_STATE = {
   comVal: [],
   ordValue: "id",
   ascdescVal: true,
-  faValue: 0,
+  faValue: [],
   suValue: 0,
   upTrValue: false,
   TSValue: undefined,
-  hintSuValue:[],
-  hintValue: false,
+  hintSuValue: [],
+  hintValue: false
 };
 
 var row_temp = [];
@@ -34,14 +34,97 @@ const commandReducer = (state = INITIAL_STATE, action) => {
     case tbodyCommandTypes.MAKE_TBODY:
     function makeTbodyArray() {
       let subscription = properties$.subscribe((data) => {
+        // console.log(
+        //   "***************************makeTbodyArray()***************************"
+        // );
+        // console.log("action.payload");
+        // console.log(action.payload);
+        // console.log("action.array");
+        // console.log(JSON.stringify(action.array));
+
         if (row_temp.length < 10) {
           // console.log("row_temp" + row_temp);
-          data["love"] = 0;
+          // console.log("action.payload");
+          // console.log(action.payload);
+          //
+          // console.log("action.array");
+          // console.log(action.array);
+          // console.log(action.array["id"]);
+
+          // if (action.array !== "undefined") {
+          //   // console.log("action.array(item => item.id === '10000')");
+          //   // console.log(action.array(item => item.id === '10000'));
+          // }
+          // console.log("(action.payload)");
+          // console.log(action.payload);
+          // console.log("action.array");
+          // console.log(JSON.stringify(action.array));
+
+          // if (action.payload) {
+          // if (action.array !== undefined) {
+
+          //   console.log("comval 1.1");
+          // console.log(JSON.stringify(action.array));
+
+          // if (action.array.length < 1) {
+          //   data["love"] = 0;
+          // }
+          // console.log("FUNCT");
+
+          // let inside = "1001".includes(needToFind2);
+          // if (entry.id.toString().includes(needToFind2)) {
+          //   sugArr2.push(entry);
+          // }
+          // }
+          // } else {
+          // console.log("GOING TO ZERO");
+
+          // }
+
+          //   console.log("comval 1.2");
+          // console.log(JSON.stringify(action.array));
+          console.log("action.mbarray !== undefined");
+          console.log(action.mbarray !== undefined);
+
+          if (action.mbarray !== undefined) {
+            console.log("action.mbarray[entry.payload]");
+            console.log(action.mbarray[entry.payload]);
+            if (action.mbarray[entry.payload]) {
+              row_temp["love"] = true;
+            }
+            // action.mbarray.forEach(function (entry) {
+            //   let parses = entry.love;
+            //   // console.log("parses");
+            //   // console.log(parses);
+            //   // console.log("entry.id");
+            //   // console.log(entry.id);
+            //   // console.log('data["id"]');
+            //   // console.log(data["id"]);
+            //   // console.log(entry.id === data["id"]);
+            //   // if (entry.id === data["id"] && data["love"] !== entry.love) {
+            //   // data["love"] = 0;
+
+            //   if (entry.id === row_temp["id"]) {
+            //     // console.log(entry.id);
+            //     // console.log(entry.love);
+            //     row_temp["love"] = entry.love;
+            //     // entry.love
+            //     //   console.log("JSON.stringify(action.array)");
+            //     // console.log(JSON.stringify(action.array));
+            //     // else {
+            //     //   data["love"] = 0;
+            //   }
+            // });
+          }
           row_temp.push(data);
         } else {
           subscription.unsubscribe();
         }
       });
+
+      // console.log("---------------------row_temp---------------------");
+      // console.log(JSON.stringify(row_temp));
+      // console.log("---------------------row_temp---------------------");
       return row_temp;
     }
       let sortedArrFirst = sortJSON(
@@ -58,6 +141,9 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       // console.log(state.ascdescVal);
       // console.log("***END AFTER sortedArrFirst***");
       row_temp = [];
+      // console.log("sortedArrFirst");
+      // console.log(JSON.stringify(sortedArrFirst));
+
       return {
         ...state,
         comVal: sortedArrFirst
@@ -67,7 +153,7 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       let sortedArr = sortJSON(
           state.comVal,
           action.payload.toLowerCase(),
-          action.ascdesc
+          action.ordascdesc
       );
 
       if (state.suValue === 0) {
@@ -75,24 +161,63 @@ const commandReducer = (state = INITIAL_STATE, action) => {
           ...state,
           comVal: sortedArr,
           ordValue: action.payload,
-          ascdescVal: action.ascdesc
+          ascdescVal: action.ordascdesc
         };
       } else {
         return {
           ...state,
           suValue: sortedArr,
           ordValue: action.payload,
-          ascdescVal: action.ascdesc
+          ascdescVal: action.ordascdesc
         };
       }
 
     case tbodyCommandTypes.ISINFAV_VALUE:
-      let fa = action.payload;
+      let fa = action.array;
+
+      // console.log("fa");
+      // console.log(fa);
+
+      let newfaValue = new Map(state.faValue);
+
+      // console.log("state.faValue[1]");
+      // console.log(state.faValue[1]);
+
+      // var counter = state.faValue[0];
+      // newfaValue = state.faValue;
+
+      // console.log("action.boolean");
+      // console.log(action.boolean);
+
+      // console.log("action.payload");
+      // console.log(action.payload);
+
+      if (!newfaValue.get(action.payload)) {
+        // console.log("TRUE");
+        newfaValue.set(action.payload, true);
+        // newfaValue[action.payload] = true;
+
+        // console.log("if(newfaValue[10000]){");
+        // if(newfaValue[10000]){
+        // console.log('newfaValue[10000]');
+        //     console.log(newfaValue[10000]);
+        // }
+      } else {
+        // console.log("FALCE");
+        // const index = arr.indexOf(newfaValue[action.payload]);
+        newfaValue.delete(action.payload);
+        // if (newfaValue[action.payload]) {
+        //   console.log("we have it");
+        //   console.log("index is " + index);
+        //   arr.splice(index, 1);
+        // }
+      }
+
       return {
         ...state,
         // ,
         comVal: fa,
-        faValue: state.faValue + 1
+        faValue: newfaValue
       };
 
     case tbodyCommandTypes.SUGG_VALUE:
@@ -107,10 +232,16 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       let input = state.TSValue;
 
     function compare(needToFind) {
-      console.log("needToFind.split().length !!"+needToFind.toString().split("").length);
+      // console.log(
+      //   "needToFind.split().length !!" +
+      //     needToFind.toString().split("").length
+      // );
       if (needToFind !== 0) {
-        console.log("needToFind"+needToFind)
-        console.log("needToFind.split().length"+needToFind.toString().split(" ").length);
+        // console.log("needToFind" + needToFind);
+        // console.log(
+        //   "needToFind.split().length" +
+        //     needToFind.toString().split(" ").length
+        // );
         if (isNumeric(needToFind)) {
           action.payload.forEach(function (entry) {
             let parses = entry.id;
@@ -176,7 +307,6 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       };
 
     case tbodyCommandTypes.HINT_SUGG_VALUE:
-
     function isNumeric2(str) {
       if (typeof str != "string") return false; // we only process strings!
       return (
@@ -188,10 +318,16 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       let input2 = state.TSValue;
 
     function compare2(needToFind2) {
-      console.log("needToFind2.split().length !!"+needToFind2.toString().split("").length);
+      // console.log(
+      //   "needToFind2.split().length !!" +
+      //     needToFind2.toString().split("").length
+      // );
       if (needToFind2 !== 0) {
-        console.log("needToFind2"+needToFind2)
-        console.log("needToFind2.split().length"+needToFind2.toString().split(" ").length);
+        // console.log("needToFind2" + needToFind2);
+        // console.log(
+        //   "needToFind2.split().length" +
+        //     needToFind2.toString().split(" ").length
+        // );
         if (isNumeric2(needToFind2)) {
           action.payload.forEach(function (entry) {
             let parses = entry.id;
@@ -243,14 +379,12 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       };
 
     case tbodyCommandTypes.UPDATEHINT_VALUE:
-
       var hintBool = action.payload;
 
       return {
         ...state,
         hintValue: hintBool
       };
-
 
     default:
       return state;

@@ -49,29 +49,29 @@ class TableRowHeaderMap extends Component {
       { name: "Is in favorite", id: "love" }
     ];
     const HEAD_NAMES = head_names.map((number, index) => (
-      <th key={index}>
-        <button
-          onClick={() => {
-            if (this.props.suValue === 0) {
-              this.props.setOrderVal(
-                number.id,
-                this.props.comVal,
-                !this.state.ascdescVal
-              );
-            } else {
-              this.props.setOrderVal(
-                number.id,
-                this.props.suValue,
-                !this.state.ascdescVal
-              );
-            }
-          }}
-          type="button"
-        >
-          {" "}
-          {number.name}
-        </button>
-      </th>
+        <th key={index}>
+          <button
+              onClick={() => {
+                if (this.props.suValue === 0) {
+                  this.props.setOrderVal(
+                      number.id,
+                      this.props.comVal,
+                      !this.state.ascdescVal
+                  );
+                } else {
+                  this.props.setOrderVal(
+                      number.id,
+                      this.props.suValue,
+                      !this.state.ascdescVal
+                  );
+                }
+              }}
+              type="button"
+          >
+            {" "}
+            {number.name}
+          </button>
+        </th>
     ));
 
     return HEAD_NAMES;
@@ -79,11 +79,11 @@ class TableRowHeaderMap extends Component {
 
   render() {
     return (
-      <thead>
+        <thead>
         <tr>
           <this.TableHeader />
         </tr>
-      </thead>
+        </thead>
     );
   }
 }
@@ -96,7 +96,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   setOrderVal: (ordvalue, arrayvalue, ascdesc) =>
-    dispatch(ORDER_VALUE(ordvalue, arrayvalue, ascdesc))
+      dispatch(ORDER_VALUE(ordvalue, arrayvalue, ascdesc))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableRowHeaderMap);

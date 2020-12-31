@@ -154,9 +154,9 @@ class TSearch extends React.Component {
   onChange = (event) => {
     this.props.changeHintValue(true);
     this.setState({ hide: false });
-    console.log("***event.target.value***");
-    console.log(event.target.value);
-    console.log("***event.target.value***");
+    // console.log("***event.target.value***");
+    // console.log(event.target.value);
+    // console.log("***event.target.value***");
     if (event.target.value !== "") {
       this.props.STSVal(event.target.value);
       // this.props.suggVal(this.state.comVal);
@@ -169,7 +169,7 @@ class TSearch extends React.Component {
   onKeyDown = (event) => {
     if (event.target !== undefined) {
       if (event.keyCode === 13) {
-        console.log("ENTER");
+        // console.log("ENTER");
         if (event.target.value !== "") {
           this.props.STSVal(event.target.value);
           this.props.suggVal(this.state.comVal);

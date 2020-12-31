@@ -5,8 +5,7 @@ import { connect } from "react-redux";
 import {
   MAKE_TBODY,
   ISINFAV_VALUE,
-  UPDATETRIGGER_VALUE,
-
+  UPDATETRIGGER_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
 import {
@@ -40,10 +39,10 @@ class TableBody extends Component {
       let propCom = nextProps.suValue;
       let propCom2 = nextProps.comVal;
       if (propCom !== 0) {
-        return { tbody: propCom, suValue: propCom };
+        return { tbody: propCom, suValue: propCom, comVal: propCom2 };
       } else {
         let propCom2 = nextProps.comVal;
-        return { tbody: propCom2 };
+        return { tbody: propCom2, comVal: propCom2 };
       }
     }
 
@@ -60,11 +59,13 @@ class TableBody extends Component {
   }
 
   componentDidMount() {
-    this.props.makeTbody();
-    var thisObj = this;
-    const setStateAsync = (obj, state) => {
-      return new Promise((resolve) => obj.setState(state, resolve));
-    };
+    // console.log("Tbody FIRST");
+    // this.props.makeTbody(false, this.state.comVal);
+
+    // var thisObj = this;
+    // const setStateAsync = (obj, state) => {
+    //   return new Promise((resolve) => obj.setState(state, resolve));
+    // };
 
     let Tbody = [];
 
@@ -80,10 +81,10 @@ class TableBody extends Component {
       });
     }
 
-    setTimeout(() => {
-      let result = sortJSON(thisObj.props.comVal, "id", true);
-      setStateAsync(thisObj, { tbody: result });
-    }, 1000);
+    // setTimeout(() => {
+    //   let result = sortJSON(thisObj.props.comVal, "id", true);
+    //   setStateAsync(thisObj, { tbody: result });
+    // }, 1000);
   }
 
   Loading = (comVal_insert) => {
@@ -91,37 +92,53 @@ class TableBody extends Component {
     var clicks = 0;
     for (let key in comVal_insert) {
       Tbody.push(
-        <tr key={key}>
-          <td>{comVal_insert[key].id}</td>
-          <td>{comVal_insert[key].address}</td>
-          <td>{comVal_insert[key].price}</td>
-          <td>{comVal_insert[key].lastUpdate}</td>
-          <td>{comVal_insert[key].type}</td>
-          <td>
-            <button
-              onClick={(event) => {
-                function setLoveValue(id, jsonObj) {
-                  for (var i = 0; i < jsonObj.length; i++) {
-                    if (jsonObj[i].id === id) {
-                      jsonObj[i].love = !jsonObj[i].love;
-                      return jsonObj;
-                    }
-                  }
-                }
-                clicks++;
+          <tr key={key}>
+            <td>{comVal_insert[key].id}</td>
+            <td>{comVal_insert[key].address}</td>
+            <td>{comVal_insert[key].price}</td>
+            <td>{comVal_insert[key].lastUpdate}</td>
+            <td>{comVal_insert[key].type}</td>
+            <td>
+              <button
+                  onClick={(event) => {
+                    function setLoveValue(id, jsonObj) {
+                      for (var i = 0; i < jsonObj.length; i++) {
+                        if (jsonObj[i].id === id) {
+                          jsonObj[i].love = !jsonObj[i].love;
+                          // console.log("jsonObj");
+                          // console.log(jsonObj);
 
-                if (clicks > 0) {
-                  this.props.makeFav(
-                    setLoveValue(comVal_insert[key].id, this.state.comVal)
-                  );
-                } else {
-                }
-              }}
-            >
-              {comVal_insert[key].love ? "true" : "false"}
-            </button>
-          </td>
-        </tr>
+                          return jsonObj;
+                        }
+                      }
+                    }
+                    clicks++;
+
+                    if (clicks > 0) {
+                      // console.log('makeFav');
+                      // console.log(comVal_insert[key].id);
+                      // console.log(this.state);
+                      // console.log("this.state.comVal CHECK");
+                      // console.log(this.state.comVal);
+                      // console.log("comVal_insert[key].love");
+                      // console.log(comVal_insert[key].love);
+                      var loveBool = false;
+                      if (comVal_insert[key].love == "true") {
+                        loveBool = true;
+                      }
+                      this.props.makeFav(
+                          comVal_insert[key].id,
+                          setLoveValue(comVal_insert[key].id, this.state.comVal),
+                          loveBool
+                      );
+                    } else {
+                    }
+                  }}
+              >
+                {comVal_insert[key].love ? "true" : "false"}
+              </button>
+            </td>
+          </tr>
       );
     }
     return Tbody;
@@ -138,14 +155,14 @@ class TableBody extends Component {
     Tbody = this.Loading(this.state.tbody);
 
     return (
-      <tbody>
+        <tbody>
         {this.state.tbody
-          ? this.state.tbody.length > 0
-            ? this.Loading(this.state.tbody)
-            : template()
-          : "false"}
+            ? this.state.tbody.length > 0
+                ? this.Loading(this.state.tbody)
+                : template()
+            : "false"}
         {/* {JSON.stringify(this.props.comVal)} */}
-      </tbody>
+        </tbody>
     );
   }
 }
@@ -161,8 +178,10 @@ const mapStateToProps = createStructuredSelector({
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const mapDispatchToProps = () => (dispatch) => ({
-  makeTbody: () => dispatch(MAKE_TBODY()),
-  makeFav: (arrayvalue) => dispatch(ISINFAV_VALUE(arrayvalue)),
+  makeTbody: (boolvalue, mbarrayvalue) =>
+      dispatch(MAKE_TBODY(boolvalue, mbarrayvalue)),
+  makeFav: (id, arrayvalue, boolvalue) =>
+      dispatch(ISINFAV_VALUE(id, arrayvalue, boolvalue)),
   changeUpTr: () => dispatch(UPDATETRIGGER_VALUE())
 });
 

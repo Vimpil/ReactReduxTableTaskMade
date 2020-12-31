@@ -2,32 +2,32 @@ import { createSelector } from "reselect";
 
 const selectVal = (state) => state.comVal;
 export const selectCommandValue = createSelector(
-  [selectVal],
-  (comVal) => comVal.comVal
+    [selectVal],
+    (comVal) => comVal.comVal
 );
 
 const selectAsc = (state) => state.ascdescVal;
 export const selectAscValue = createSelector(
-  [selectAsc],
-  (ascdescVal) => ascdescVal.ascdescVal
+    [selectAsc],
+    (ascdescVal) => ascdescVal.ascdescVal
 );
 
 const selectOrd = (state) => state.ordValue;
 export const selectOrdValue = createSelector(
-  [selectOrd],
-  (ordValue) => ordValue.ordValue
+    [selectOrd],
+    (ordValue) => ordValue.ordValue
 );
 
 const selectFav = (state) => state.faValue;
 export const selectFaValue = createSelector(
-  [selectFav],
-  (faValue) => faValue.faValue
+    [selectFav],
+    (faValue) => faValue.faValue
 );
 
 const selectSug = (state) => state.suValue;
 export const selectSuValue = createSelector(
-  [selectSug],
-  (suValue) => suValue.suValue
+    [selectSug],
+    (suValue) => suValue.suValue
 );
 
 const selectHintSug = (state) => state.hintSuValue;
@@ -38,14 +38,14 @@ export const selectHintSuValue = createSelector(
 
 const selectTs = (state) => state.TSValue;
 export const selectTsValue = createSelector(
-  [selectTs],
-  (TSValue) => TSValue.TSValue
+    [selectTs],
+    (TSValue) => TSValue.TSValue
 );
 
 const selectUpTr = (state) => state.upTrValue;
 export const selectUpTrValue = createSelector(
-  [selectUpTr],
-  (upTrValue) => upTrValue.upTrValue
+    [selectUpTr],
+    (upTrValue) => upTrValue.upTrValue
 );
 
 const selectHint = (state) => state.hintValue;
@@ -53,6 +53,5 @@ export const selectHintValue = createSelector(
     [selectHint],
     (hintValue) => hintValue.hintValue
 );
-
 
 // UPDATEHINT_VALUE
