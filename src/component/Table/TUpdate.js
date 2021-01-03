@@ -8,7 +8,8 @@ import {
     ORDER_VALUE,
     TBODY_ASCDESC,
     HINT_SUGG_VALUE,
-    UPDATEHINT_VALUE
+    UPDATEHINT_VALUE,
+    ISINFAV_VALUE
 } from "./../../store/tbodyCommand/tbodyCommand.action";
 import { createStructuredSelector } from "reselect";
 import {
@@ -19,7 +20,8 @@ import {
     selectTsValue,
     selectUpTrValue,
     selectHintSuValue,
-    selectHintValue
+    selectHintValue,
+    selectFaValue
 } from "./../../store/tbodyCommand/tbodyCommand.selector";
 
 class TUpdate extends Component {
@@ -34,7 +36,8 @@ class TUpdate extends Component {
             upTrValue: this.props.upTrValue,
             suggVal: this.props.suggVal,
             ordValue: this.props.ordValue,
-            hintValue: this.props.hintValue
+            hintValue: this.props.hintValue,
+            faValue: this.props.faValue
         };
     }
 
@@ -61,6 +64,7 @@ class TUpdate extends Component {
             if (nextProps.comVal !== prevState.comVal) {
                 obj.comVal = nextProps.comVal;
                 obj.tbody = nextProps.comVal;
+                obj.ordValue = nextProps.ordValue;
             }
 
             if (nextProps.upTrValue !== prevState.upTrValue) {
@@ -68,7 +72,7 @@ class TUpdate extends Component {
             }
 
             if (nextProps.ascdescVal !== prevState.ascdescVal) {
-                obj.ascdescVal = obj.ascdescVal;
+                obj.ascdescVal = nextProps.ascdescVal;
             }
 
             if (nextProps.ordValue !== prevState.ordValue) {
@@ -85,9 +89,18 @@ class TUpdate extends Component {
 
     componentDidMount() {
         const timer = setInterval((props) => {
-            console.log("TUpdate INTERVAL");
-            // console.log(JSON.stringify(this.state.comVal));
-            this.props.makeTbody(true, this.state.comVal);
+            // console.log("TUpdate INTERVAL");
+            // console.log(this.state.faValue);
+            // console.log("**");
+            // console.log(JSON.stringify(this.state.faValue));
+            // console.log("tipe");
+            // var type = typeof this.state.faValue;
+            // console.log(type);
+
+            console.log("this.state.ascdescVal");
+            console.log(this.state.ascdescVal);
+
+            this.props.makeTbody(true, this.state.faValue);
             this.props.setOrderVal(
                 this.state.ordValue,
                 this.state.comVal,
@@ -130,13 +143,14 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = () => (dispatch) => ({
     suggVal: (arrayvalue) => dispatch(SUGG_VALUE(arrayvalue)),
-    makeTbody: (boolvalue, arrayvalue) =>
-        dispatch(MAKE_TBODY(boolvalue, arrayvalue)),
+    makeTbody: (boolvalue, mapvalue) => dispatch(MAKE_TBODY(boolvalue, mapvalue)),
     changeUpdateTrValue: () => dispatch(UPDATETRIGGER_VALUE()),
     setOrderVal: (ordvalue, arrayvalue, ascdesc) =>
         dispatch(ORDER_VALUE(ordvalue, arrayvalue, ascdesc)),
     changeHintValue: (boolvalue) => dispatch(UPDATEHINT_VALUE(boolvalue)),
-    changeHintSuValue: (arrayvalue) => dispatch(HINT_SUGG_VALUE(arrayvalue))
+    changeHintSuValue: (arrayvalue) => dispatch(HINT_SUGG_VALUE(arrayvalue)),
+    makeFav: (id, arrayvalue, boolvalue) =>
+        dispatch(ISINFAV_VALUE(id, arrayvalue, boolvalue))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TUpdate);

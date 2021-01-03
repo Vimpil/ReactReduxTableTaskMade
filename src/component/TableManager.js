@@ -5,20 +5,20 @@ import TSearch from "./Table/TSearch";
 import TUpdate from "./Table/TUpdate";
 
 class TableManager extends Component {
-  componentWillReceiveProps(nextProps, nextContext) {}
+    componentWillReceiveProps(nextProps, nextContext) {}
 
-  render() {
-    return (
-      <>
-        <TSearch />
-        <TUpdate />
-        <table id="data_table">
-          <TableHeader />
-          <TableBody />
-        </table>
-      </>
-    );
-  }
+    render() {
+        return (
+            <>
+                <TSearch />
+                <TUpdate />
+                <table id="data_table">
+                    <TableHeader />
+                    <TableBody />
+                </table>
+            </>
+        );
+    }
 }
 
 export default TableManager;

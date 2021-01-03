@@ -1,10 +1,10 @@
 import { tbodyCommandTypes } from "./tbodyCommand.types";
 
-export const MAKE_TBODY = (boolean, array) => ({
+export const MAKE_TBODY = (boolean, map) => ({
   // boolean
   type: tbodyCommandTypes.MAKE_TBODY,
   payload: boolean,
-  array
+  map
 });
 
 export const TBODY_ASCDESC = () => ({
@@ -18,11 +18,11 @@ export const ORDER_VALUE = (order, array, ascdesc) => ({
   ascdesc
 });
 
-export const ISINFAV_VALUE = (id, array, boolean) => ({
+export const ISINFAV_VALUE = (id, array, faarray) => ({
   type: tbodyCommandTypes.ISINFAV_VALUE,
   payload: id,
   array,
-  boolean
+  faarray
 });
 
 export const SUGG_VALUE = (array) => ({

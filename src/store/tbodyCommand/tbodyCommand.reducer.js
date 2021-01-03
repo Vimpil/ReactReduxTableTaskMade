@@ -83,16 +83,20 @@ const commandReducer = (state = INITIAL_STATE, action) => {
 
           //   console.log("comval 1.2");
           // console.log(JSON.stringify(action.array));
-          console.log("action.mbarray !== undefined");
-          console.log(action.mbarray !== undefined);
+          // console.log("action.array !== undefined");
+          // console.log(action.array !== undefined);
+          // console.log("action.array");
+          // console.log(action.array);
 
-          if (action.mbarray !== undefined) {
-            console.log("action.mbarray[entry.payload]");
-            console.log(action.mbarray[entry.payload]);
-            if (action.mbarray[entry.payload]) {
+          // console.log("ACTION" + JSON.stringify(action));
+
+          if (action.array !== undefined) {
+            // console.log("action.array[entry.payload]");
+            // console.log(action.array[action.payload]);
+            if (action.array[action.payload]) {
               row_temp["love"] = true;
             }
-            // action.mbarray.forEach(function (entry) {
+            // action.array.forEach(function (entry) {
             //   let parses = entry.love;
             //   // console.log("parses");
             //   // console.log(parses);
@@ -150,35 +154,38 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       };
 
     case tbodyCommandTypes.ORDER_VALUE:
+      console.log("tbodyCommandTypes.ORDER_VALUE");
+      console.log(action.ascdesc);
       let sortedArr = sortJSON(
           state.comVal,
           action.payload.toLowerCase(),
-          action.ordascdesc
+          action.ascdesc
       );
-
+      console.log("tbodyCommandTypes.ORDER_VALUE");
+      console.log(action.ascdesc);
       if (state.suValue === 0) {
         return {
           ...state,
           comVal: sortedArr,
           ordValue: action.payload,
-          ascdescVal: action.ordascdesc
+          ascdescVal: action.ascdesc
         };
       } else {
         return {
           ...state,
           suValue: sortedArr,
           ordValue: action.payload,
-          ascdescVal: action.ordascdesc
+          ascdescVal: action.ascdesc
         };
       }
 
     case tbodyCommandTypes.ISINFAV_VALUE:
       let fa = action.array;
-
+      var newFaArr = [];
       // console.log("fa");
       // console.log(fa);
 
-      let newfaValue = new Map(state.faValue);
+      // let newfaValue = new Map(state.faValue);
 
       // console.log("state.faValue[1]");
       // console.log(state.faValue[1]);
@@ -192,32 +199,47 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       // console.log("action.payload");
       // console.log(action.payload);
 
-      if (!newfaValue.get(action.payload)) {
-        // console.log("TRUE");
-        newfaValue.set(action.payload, true);
-        // newfaValue[action.payload] = true;
-
-        // console.log("if(newfaValue[10000]){");
-        // if(newfaValue[10000]){
-        // console.log('newfaValue[10000]');
-        //     console.log(newfaValue[10000]);
-        // }
-      } else {
-        // console.log("FALCE");
-        // const index = arr.indexOf(newfaValue[action.payload]);
-        newfaValue.delete(action.payload);
-        // if (newfaValue[action.payload]) {
-        //   console.log("we have it");
-        //   console.log("index is " + index);
-        //   arr.splice(index, 1);
-        // }
+    function findIDinArr(newArray, array, id) {
+      for (var i = 0; i < action.array.length - 1; i++) {
+        if (action.array[i] === action.id) {
+          const index = action.array.indexOf(action.array[i]);
+          newArray = action.array.splice(index, 1);
+          return newArray;
+        }
       }
+
+      newArray = action.array;
+      newArray["id"] = id;
+      return newArray;
+    }
+
+      // if (!newfaValue.get(action.payload)) {
+      //   // console.log("TRUE");
+      //   newfaValue.set(action.payload, true);
+      //   // newfaValue[action.payload] = true;
+
+      //   // console.log("if(newfaValue[10000]){");
+      //   // if(newfaValue[10000]){
+      //   // console.log('newfaValue[10000]');
+      //   //     console.log(newfaValue[10000]);
+      //   // }
+      // } else {
+      //   // console.log("FALCE");
+      //   // const index = arr.indexOf(newfaValue[action.payload]);
+      //   newfaValue.delete(action.payload);
+
+      //   // if (newfaValue[action.payload]) {
+      //   //   console.log("we have it");
+      //   //   console.log("index is " + index);
+      //   //   arr.splice(index, 1);
+      //   // }
+      // }
 
       return {
         ...state,
         // ,
         comVal: fa,
-        faValue: newfaValue
+        faValue: action.faarray
       };
 
     case tbodyCommandTypes.SUGG_VALUE:

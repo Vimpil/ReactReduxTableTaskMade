@@ -101,6 +101,20 @@ class TableBody extends Component {
             <td>
               <button
                   onClick={(event) => {
+                    function findIDinArr(newArray, array, id) {
+                      for (var i = 0; i < array.length - 1; i++) {
+                        if (array[i] === id) {
+                          const index = array.indexOf(array[i]);
+                          newArray = array.splice(index, 1);
+                          return newArray;
+                        }
+                      }
+
+                      newArray = array;
+                      newArray.push(id);
+                      return newArray;
+                    }
+
                     function setLoveValue(id, jsonObj) {
                       for (var i = 0; i < jsonObj.length; i++) {
                         if (jsonObj[i].id === id) {
@@ -126,10 +140,26 @@ class TableBody extends Component {
                       if (comVal_insert[key].love == "true") {
                         loveBool = true;
                       }
+
+                      var newFaArr = [];
+                      console.log("findIDinArr----");
+                      console.log(
+                          JSON.stringify(
+                              findIDinArr(
+                                  newFaArr,
+                                  this.state.faValue,
+                                  comVal_insert[key].id
+                              )
+                          )
+                      );
                       this.props.makeFav(
                           comVal_insert[key].id,
                           setLoveValue(comVal_insert[key].id, this.state.comVal),
-                          loveBool
+                          findIDinArr(
+                              newFaArr,
+                              this.state.faValue,
+                              comVal_insert[key].id
+                          )
                       );
                     } else {
                     }
@@ -178,8 +208,7 @@ const mapStateToProps = createStructuredSelector({
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const mapDispatchToProps = () => (dispatch) => ({
-  makeTbody: (boolvalue, mbarrayvalue) =>
-      dispatch(MAKE_TBODY(boolvalue, mbarrayvalue)),
+  makeTbody: (boolvalue, mapvalue) => dispatch(MAKE_TBODY(boolvalue, mapvalue)),
   makeFav: (id, arrayvalue, boolvalue) =>
       dispatch(ISINFAV_VALUE(id, arrayvalue, boolvalue)),
   changeUpTr: () => dispatch(UPDATETRIGGER_VALUE())
