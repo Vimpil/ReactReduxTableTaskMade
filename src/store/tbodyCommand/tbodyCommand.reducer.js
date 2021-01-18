@@ -40,95 +40,124 @@ const commandReducer = (state = INITIAL_STATE, action) => {
         // console.log("action.payload");
         // console.log(action.payload);
         // console.log("action.array");
+        // console.log(action.array);
+        // console.log(action.array !== undefined);
         // console.log(JSON.stringify(action.array));
+        if (row_temp !== undefined) {
+          if (row_temp.length < 10) {
+            if (row_temp.length === 9) {
+              if (action.array !== undefined) {
+                // console.log("action.array[entry.payload]");
+                // console.log(action.array[action.payload]);
 
-        if (row_temp.length < 10) {
-          // console.log("row_temp" + row_temp);
-          // console.log("action.payload");
-          // console.log(action.payload);
-          //
-          // console.log("action.array");
-          // console.log(action.array);
-          // console.log(action.array["id"]);
+                // if (action.array[action.payload]) {
+                //   row_temp["love"] = true;
+                // }
 
-          // if (action.array !== "undefined") {
-          //   // console.log("action.array(item => item.id === '10000')");
-          //   // console.log(action.array(item => item.id === '10000'));
-          // }
-          // console.log("(action.payload)");
-          // console.log(action.payload);
-          // console.log("action.array");
-          // console.log(JSON.stringify(action.array));
+                // action.array.forEach(function (entry) {
+                //   let parses = entry.love;
+                //   // console.log("parses");
+                //   // console.log(parses);
+                //   // console.log("entry.id");
+                //   // console.log(entry.id);
+                //   // console.log('data["id"]');
+                //   // console.log(data["id"]);
+                //   // console.log(entry.id === data["id"]);
+                //   // if (entry.id === data["id"] && data["love"] !== entry.love) {
+                //   // data["love"] = 0;
 
-          // if (action.payload) {
-          // if (action.array !== undefined) {
+                //   if (entry.id === row_temp["id"]) {
+                //     // console.log(entry.id);
+                //     // console.log(entry.love);
+                //     row_temp["love"] = entry.love;
+                //     // entry.love
+                //     //   console.log("JSON.stringify(action.array)");
+                //     // console.log(JSON.stringify(action.array));
+                //     // else {
+                //     //   data["love"] = 0;
+                //   }
+                // });
 
-          //   console.log("comval 1.1");
-          // console.log(JSON.stringify(action.array));
+                for (var i = 0; i < action.array.length; i++) {
+                  row_temp.forEach(function (entry) {
+                    let parses = entry.id;
+                    if (parses === action.array[i]) {
+                      entry.love = true;
+                    }
+                    // let inside = "1001".includes(needToFind2);
+                    // if (entry.id.toString().includes(needToFind2)) {
+                    //   sugArr2.push(entry);
+                    // }
+                  });
+                  // row_temp[action.array[i]].love = true;
 
-          // if (action.array.length < 1) {
-          //   data["love"] = 0;
-          // }
-          // console.log("FUNCT");
-
-          // let inside = "1001".includes(needToFind2);
-          // if (entry.id.toString().includes(needToFind2)) {
-          //   sugArr2.push(entry);
-          // }
-          // }
-          // } else {
-          // console.log("GOING TO ZERO");
-
-          // }
-
-          //   console.log("comval 1.2");
-          // console.log(JSON.stringify(action.array));
-          // console.log("action.array !== undefined");
-          // console.log(action.array !== undefined);
-          // console.log("action.array");
-          // console.log(action.array);
-
-          // console.log("ACTION" + JSON.stringify(action));
-
-          if (action.array !== undefined) {
-            // console.log("action.array[entry.payload]");
-            // console.log(action.array[action.payload]);
-            if (action.array[action.payload]) {
-              row_temp["love"] = true;
+                  // console.log('row_temp');
+                  // console.log(row_temp);
+                  // console.log(row_temp[10000]);
+                  // console.log("row_temp[action.array[i]]");
+                  // console.log(row_temp[action.array[i]]);
+                }
+              }
             }
-            // action.array.forEach(function (entry) {
-            //   let parses = entry.love;
-            //   // console.log("parses");
-            //   // console.log(parses);
-            //   // console.log("entry.id");
-            //   // console.log(entry.id);
-            //   // console.log('data["id"]');
-            //   // console.log(data["id"]);
-            //   // console.log(entry.id === data["id"]);
-            //   // if (entry.id === data["id"] && data["love"] !== entry.love) {
-            //   // data["love"] = 0;
 
-            //   if (entry.id === row_temp["id"]) {
-            //     // console.log(entry.id);
-            //     // console.log(entry.love);
-            //     row_temp["love"] = entry.love;
-            //     // entry.love
-            //     //   console.log("JSON.stringify(action.array)");
-            //     // console.log(JSON.stringify(action.array));
-            //     // else {
-            //     //   data["love"] = 0;
-            //   }
-            // });
+            // console.log("row_temp" + row_temp);
+            // console.log("action.payload");
+            // console.log(action.payload);
+            //
+            // console.log("action.array");
+            // console.log(action.array);
+            // console.log(action.array["id"]);
+
+            // if (action.array !== "undefined") {
+            //   // console.log("action.array(item => item.id === '10000')");
+            //   // console.log(action.array(item => item.id === '10000'));
+            // }
+            // console.log("(action.payload)");
+            // console.log(action.payload);
+            // console.log("action.array");
+            // console.log(JSON.stringify(action.array));
+
+            // if (action.payload) {
+            // if (action.array !== undefined) {
+
+            //   console.log("comval 1.1");
+            // console.log(JSON.stringify(action.array));
+
+            // if (action.array.length < 1) {
+            //   data["love"] = 0;
+            // }
+            // console.log("FUNCT");
+
+            // let inside = "1001".includes(needToFind2);
+            // if (entry.id.toString().includes(needToFind2)) {
+            //   sugArr2.push(entry);
+            // }
+            // }
+            // } else {
+            // console.log("GOING TO ZERO");
+
+            // }
+
+            //   console.log("comval 1.2");
+            // console.log(JSON.stringify(action.array));
+            // console.log("action.array !== undefined");
+            // console.log(action.array !== undefined);
+            // console.log("action.array");
+            // console.log(action.array);
+
+            // console.log("ACTION" + JSON.stringify(action));
+
+            row_temp.push(data);
+          } else {
+            subscription.unsubscribe();
           }
-          row_temp.push(data);
-        } else {
-          subscription.unsubscribe();
         }
       });
 
       // console.log("---------------------row_temp---------------------");
       // console.log(JSON.stringify(row_temp));
       // console.log("---------------------row_temp---------------------");
+
       return row_temp;
     }
       let sortedArrFirst = sortJSON(
@@ -154,15 +183,15 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       };
 
     case tbodyCommandTypes.ORDER_VALUE:
-      console.log("tbodyCommandTypes.ORDER_VALUE");
-      console.log(action.ascdesc);
+      // console.log("tbodyCommandTypes.ORDER_VALUE");
+      // console.log(action.ascdesc);
       let sortedArr = sortJSON(
           state.comVal,
           action.payload.toLowerCase(),
           action.ascdesc
       );
-      console.log("tbodyCommandTypes.ORDER_VALUE");
-      console.log(action.ascdesc);
+      // console.log("tbodyCommandTypes.ORDER_VALUE");
+      // console.log(action.ascdesc);
       if (state.suValue === 0) {
         return {
           ...state,
@@ -181,7 +210,7 @@ const commandReducer = (state = INITIAL_STATE, action) => {
 
     case tbodyCommandTypes.ISINFAV_VALUE:
       let fa = action.array;
-      var newFaArr = [];
+      // var newFaArr = [];
       // console.log("fa");
       // console.log(fa);
 
@@ -199,19 +228,19 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       // console.log("action.payload");
       // console.log(action.payload);
 
-    function findIDinArr(newArray, array, id) {
-      for (var i = 0; i < action.array.length - 1; i++) {
-        if (action.array[i] === action.id) {
-          const index = action.array.indexOf(action.array[i]);
-          newArray = action.array.splice(index, 1);
-          return newArray;
-        }
-      }
+      // function findIDinArr(newArray, array, id) {
+      //   for (var i = 0; i < action.array.length - 1; i++) {
+      //     if (action.array[i] === action.id) {
+      //       const index = action.array.indexOf(action.array[i]);
+      //       newArray = action.array.splice(index, 1);
+      //       return newArray;
+      //     }
+      //   }
 
-      newArray = action.array;
-      newArray["id"] = id;
-      return newArray;
-    }
+      //   newArray = action.array;
+      //   newArray["id"] = id;
+      //   return newArray;
+      // }
 
       // if (!newfaValue.get(action.payload)) {
       //   // console.log("TRUE");

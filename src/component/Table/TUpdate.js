@@ -64,7 +64,6 @@ class TUpdate extends Component {
             if (nextProps.comVal !== prevState.comVal) {
                 obj.comVal = nextProps.comVal;
                 obj.tbody = nextProps.comVal;
-                obj.ordValue = nextProps.ordValue;
             }
 
             if (nextProps.upTrValue !== prevState.upTrValue) {
@@ -82,6 +81,9 @@ class TUpdate extends Component {
             if (nextProps.hintValue !== prevState.hintValue) {
                 obj.hintValue = nextProps.hintValue;
             }
+            if (nextProps.faValue !== prevState.faValue) {
+                obj.faValue = nextProps.faValue;
+            }
 
             return obj;
         }
@@ -97,10 +99,12 @@ class TUpdate extends Component {
             // var type = typeof this.state.faValue;
             // console.log(type);
 
-            console.log("this.state.ascdescVal");
-            console.log(this.state.ascdescVal);
-
+            // console.log("this.state.ascdescVal");
+            // console.log(this.state.ascdescVal);
+            console.log("this.state.faValue");
+            console.log(this.state.faValue);
             this.props.makeTbody(true, this.state.faValue);
+            // this.props.makeTbody(true, [{ 0: 10000 }, { 1: 10001 }]);
             this.props.setOrderVal(
                 this.state.ordValue,
                 this.state.comVal,
@@ -116,7 +120,7 @@ class TUpdate extends Component {
             // if (this.state.suValue !== 0) {
             //   this.props.suggVal(this.state.comVal);
             // }
-        }, 5000);
+        }, 2000);
         // const timer2 = setTimeout((props) => {
         //   this.props.makeTbody();
         //   if (this.state.suValue !== 0) {
@@ -138,6 +142,7 @@ const mapStateToProps = createStructuredSelector({
     TSvalue: selectTsValue,
     upTrValue: selectUpTrValue,
     hintValue: selectHintValue,
+    faValue: selectFaValue,
     hintSuValue: selectHintSuValue
 });
 

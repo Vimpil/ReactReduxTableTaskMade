@@ -48,7 +48,8 @@ class TableBody extends Component {
 
     if (nextProps.faValue !== prevState.faValue) {
       let propCom = nextProps.faValue;
-      return { faValue: propCom, comValue: propCom };
+      // return { faValue: propCom, comValue: propCom };
+      return { faValue: propCom };
     }
 
     if (nextProps.comVal !== prevState.comVal) {
@@ -102,14 +103,25 @@ class TableBody extends Component {
               <button
                   onClick={(event) => {
                     function findIDinArr(newArray, array, id) {
-                      for (var i = 0; i < array.length - 1; i++) {
+                      for (var i = 0; i < array.length; i++) {
+                        // console.log("array[i] === id");
+                        // console.log(array[i] === id);
+                        // console.log("typeof array[i] typeof id");
+                        // console.log(typeof array[i]);
+                        // console.log(typeof id);
+                        // console.log("END array[i] == id");
+
                         if (array[i] === id) {
+                          // console.log("WE ARE HERE");
                           const index = array.indexOf(array[i]);
-                          newArray = array.splice(index, 1);
+                          array.splice(index, 1);
+                          newArray = array;
+                          // newArray.push("DELETE");
                           return newArray;
                         }
                       }
 
+                      // console.log("WE ARE NOT HERE");
                       newArray = array;
                       newArray.push(id);
                       return newArray;
@@ -126,9 +138,11 @@ class TableBody extends Component {
                         }
                       }
                     }
+
                     clicks++;
 
                     if (clicks > 0) {
+                      // console.log("CLICK");
                       // console.log('makeFav');
                       // console.log(comVal_insert[key].id);
                       // console.log(this.state);
@@ -142,16 +156,16 @@ class TableBody extends Component {
                       }
 
                       var newFaArr = [];
-                      console.log("findIDinArr----");
-                      console.log(
-                          JSON.stringify(
-                              findIDinArr(
-                                  newFaArr,
-                                  this.state.faValue,
-                                  comVal_insert[key].id
-                              )
-                          )
-                      );
+                      // console.log("findIDinArr----");
+                      // console.log(
+                      //   JSON.stringify(
+                      //     findIDinArr(
+                      //       newFaArr,
+                      //       this.state.faValue,
+                      //       comVal_insert[key].id
+                      //     )
+                      //   )
+                      // );
                       this.props.makeFav(
                           comVal_insert[key].id,
                           setLoveValue(comVal_insert[key].id, this.state.comVal),

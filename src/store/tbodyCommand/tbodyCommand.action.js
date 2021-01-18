@@ -1,10 +1,10 @@
 import { tbodyCommandTypes } from "./tbodyCommand.types";
 
-export const MAKE_TBODY = (boolean, map) => ({
+export const MAKE_TBODY = (boolean, array) => ({
   // boolean
   type: tbodyCommandTypes.MAKE_TBODY,
   payload: boolean,
-  map
+  array
 });
 
 export const TBODY_ASCDESC = () => ({
