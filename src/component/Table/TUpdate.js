@@ -120,7 +120,7 @@ class TUpdate extends Component {
             // if (this.state.suValue !== 0) {
             //   this.props.suggVal(this.state.comVal);
             // }
-        }, 2000);
+        }, 1000);
         // const timer2 = setTimeout((props) => {
         //   this.props.makeTbody();
         //   if (this.state.suValue !== 0) {

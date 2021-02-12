@@ -12,7 +12,7 @@ class TableManager extends Component {
             <>
                 <TSearch />
                 <TUpdate />
-                <table id="data_table">
+                <table id="data_table" class="blueTable">
                     <TableHeader />
                     <TableBody />
                 </table>

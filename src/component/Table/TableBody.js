@@ -194,7 +194,7 @@ class TableBody extends Component {
 
     let Tbody = [];
     function template() {
-      return <p>...Loading</p>;
+      return <div class="loader"></div>;
     }
     Tbody = this.Loading(this.state.tbody);
 

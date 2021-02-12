@@ -201,11 +201,24 @@ class TSearch extends React.Component {
 
     return (
         <>
-          <input
-              onChange={this.onChange}
-              onKeyDown={this.onKeyDown}
-              handleClickOutside={this.handleClickOutside}
-          />
+          <div className="wrap">
+            <div className="search">
+              <input onChange={this.onChange}
+                     onKeyDown={this.onKeyDown}
+                     handleClickOutside={this.handleClickOutside}
+                     type="text" className="searchTerm" placeholder="Find the property by Address, ID or Type" />
+                {/*<button type="submit" className="searchButton">*/}
+                {/*  <i className="fa fa-search"></i>*/}
+                {/*</button>*/}
+            </div>
+          </div>
+
+          {/*<input*/}
+          {/*    onChange={this.onChange}*/}
+          {/*    onKeyDown={this.onKeyDown}*/}
+          {/*    handleClickOutside={this.handleClickOutside}*/}
+          {/*/>*/}
+
           <div id="hints" style={this.getStyle()}>
             {this.state.hintSuValue !== undefined
                 ? JSON.stringify(this.state.hintSuValue)
