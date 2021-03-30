@@ -32,138 +32,138 @@ function sortJSON(arr, key, way) {
 const commandReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case tbodyCommandTypes.MAKE_TBODY:
-    function makeTbodyArray() {
-      let subscription = properties$.subscribe((data) => {
-        // console.log(
-        //   "***************************makeTbodyArray()***************************"
-        // );
-        // console.log("action.payload");
-        // console.log(action.payload);
-        // console.log("action.array");
-        // console.log(action.array);
-        // console.log(action.array !== undefined);
-        // console.log(JSON.stringify(action.array));
-        if (row_temp !== undefined) {
-          if (row_temp.length < 10) {
-            if (row_temp.length === 9) {
-              if (action.array !== undefined) {
-                // console.log("action.array[entry.payload]");
-                // console.log(action.array[action.payload]);
+      function makeTbodyArray() {
+        let subscription = properties$.subscribe((data) => {
+          // console.log(
+          //   "***************************makeTbodyArray()***************************"
+          // );
+          // console.log("action.payload");
+          // console.log(action.payload);
+          // console.log("action.array");
+          // console.log(action.array);
+          // console.log(action.array !== undefined);
+          // console.log(JSON.stringify(action.array));
+          if (row_temp !== undefined) {
+            if (row_temp.length < 401) {
+              if (row_temp.length === 400) {
+                if (action.array !== undefined) {
+                  // console.log("action.array[entry.payload]");
+                  // console.log(action.array[action.payload]);
 
-                // if (action.array[action.payload]) {
-                //   row_temp["love"] = true;
-                // }
+                  // if (action.array[action.payload]) {
+                  //   row_temp["love"] = true;
+                  // }
 
-                // action.array.forEach(function (entry) {
-                //   let parses = entry.love;
-                //   // console.log("parses");
-                //   // console.log(parses);
-                //   // console.log("entry.id");
-                //   // console.log(entry.id);
-                //   // console.log('data["id"]');
-                //   // console.log(data["id"]);
-                //   // console.log(entry.id === data["id"]);
-                //   // if (entry.id === data["id"] && data["love"] !== entry.love) {
-                //   // data["love"] = 0;
+                  // action.array.forEach(function (entry) {
+                  //   let parses = entry.love;
+                  //   // console.log("parses");
+                  //   // console.log(parses);
+                  //   // console.log("entry.id");
+                  //   // console.log(entry.id);
+                  //   // console.log('data["id"]');
+                  //   // console.log(data["id"]);
+                  //   // console.log(entry.id === data["id"]);
+                  //   // if (entry.id === data["id"] && data["love"] !== entry.love) {
+                  //   // data["love"] = 0;
 
-                //   if (entry.id === row_temp["id"]) {
-                //     // console.log(entry.id);
-                //     // console.log(entry.love);
-                //     row_temp["love"] = entry.love;
-                //     // entry.love
-                //     //   console.log("JSON.stringify(action.array)");
-                //     // console.log(JSON.stringify(action.array));
-                //     // else {
-                //     //   data["love"] = 0;
-                //   }
-                // });
+                  //   if (entry.id === row_temp["id"]) {
+                  //     // console.log(entry.id);
+                  //     // console.log(entry.love);
+                  //     row_temp["love"] = entry.love;
+                  //     // entry.love
+                  //     //   console.log("JSON.stringify(action.array)");
+                  //     // console.log(JSON.stringify(action.array));
+                  //     // else {
+                  //     //   data["love"] = 0;
+                  //   }
+                  // });
 
-                for (var i = 0; i < action.array.length; i++) {
-                  row_temp.forEach(function (entry) {
-                    let parses = entry.id;
-                    if (parses === action.array[i]) {
-                      entry.love = true;
-                    }
-                    // let inside = "1001".includes(needToFind2);
-                    // if (entry.id.toString().includes(needToFind2)) {
-                    //   sugArr2.push(entry);
-                    // }
-                  });
-                  // row_temp[action.array[i]].love = true;
+                  for (var i = 0; i < action.array.length; i++) {
+                    row_temp.forEach(function (entry) {
+                      let parses = entry.id;
+                      if (parses === action.array[i]) {
+                        entry.love = true;
+                      }
+                      // let inside = "1001".includes(needToFind2);
+                      // if (entry.id.toString().includes(needToFind2)) {
+                      //   sugArr2.push(entry);
+                      // }
+                    });
+                    // row_temp[action.array[i]].love = true;
 
-                  // console.log('row_temp');
-                  // console.log(row_temp);
-                  // console.log(row_temp[10000]);
-                  // console.log("row_temp[action.array[i]]");
-                  // console.log(row_temp[action.array[i]]);
+                    // console.log('row_temp');
+                    // console.log(row_temp);
+                    // console.log(row_temp[10000]);
+                    // console.log("row_temp[action.array[i]]");
+                    // console.log(row_temp[action.array[i]]);
+                  }
                 }
               }
+
+              // console.log("row_temp" + row_temp);
+              // console.log("action.payload");
+              // console.log(action.payload);
+              //
+              // console.log("action.array");
+              // console.log(action.array);
+              // console.log(action.array["id"]);
+
+              // if (action.array !== "undefined") {
+              //   // console.log("action.array(item => item.id === '10000')");
+              //   // console.log(action.array(item => item.id === '10000'));
+              // }
+              // console.log("(action.payload)");
+              // console.log(action.payload);
+              // console.log("action.array");
+              // console.log(JSON.stringify(action.array));
+
+              // if (action.payload) {
+              // if (action.array !== undefined) {
+
+              //   console.log("comval 1.1");
+              // console.log(JSON.stringify(action.array));
+
+              // if (action.array.length < 1) {
+              //   data["love"] = 0;
+              // }
+              // console.log("FUNCT");
+
+              // let inside = "1001".includes(needToFind2);
+              // if (entry.id.toString().includes(needToFind2)) {
+              //   sugArr2.push(entry);
+              // }
+              // }
+              // } else {
+              // console.log("GOING TO ZERO");
+
+              // }
+
+              //   console.log("comval 1.2");
+              // console.log(JSON.stringify(action.array));
+              // console.log("action.array !== undefined");
+              // console.log(action.array !== undefined);
+              // console.log("action.array");
+              // console.log(action.array);
+
+              // console.log("ACTION" + JSON.stringify(action));
+
+              row_temp.push(data);
+            } else {
+              subscription.unsubscribe();
             }
-
-            // console.log("row_temp" + row_temp);
-            // console.log("action.payload");
-            // console.log(action.payload);
-            //
-            // console.log("action.array");
-            // console.log(action.array);
-            // console.log(action.array["id"]);
-
-            // if (action.array !== "undefined") {
-            //   // console.log("action.array(item => item.id === '10000')");
-            //   // console.log(action.array(item => item.id === '10000'));
-            // }
-            // console.log("(action.payload)");
-            // console.log(action.payload);
-            // console.log("action.array");
-            // console.log(JSON.stringify(action.array));
-
-            // if (action.payload) {
-            // if (action.array !== undefined) {
-
-            //   console.log("comval 1.1");
-            // console.log(JSON.stringify(action.array));
-
-            // if (action.array.length < 1) {
-            //   data["love"] = 0;
-            // }
-            // console.log("FUNCT");
-
-            // let inside = "1001".includes(needToFind2);
-            // if (entry.id.toString().includes(needToFind2)) {
-            //   sugArr2.push(entry);
-            // }
-            // }
-            // } else {
-            // console.log("GOING TO ZERO");
-
-            // }
-
-            //   console.log("comval 1.2");
-            // console.log(JSON.stringify(action.array));
-            // console.log("action.array !== undefined");
-            // console.log(action.array !== undefined);
-            // console.log("action.array");
-            // console.log(action.array);
-
-            // console.log("ACTION" + JSON.stringify(action));
-
-            row_temp.push(data);
-          } else {
-            subscription.unsubscribe();
           }
-        }
-      });
+        });
 
-      // console.log("---------------------row_temp---------------------");
-      // console.log(JSON.stringify(row_temp));
-      // console.log("---------------------row_temp---------------------");
+        // console.log("---------------------row_temp---------------------");
+        // console.log(JSON.stringify(row_temp));
+        // console.log("---------------------row_temp---------------------");
 
-      return row_temp;
-    }
+        return row_temp;
+      }
       let sortedArrFirst = sortJSON(
-          makeTbodyArray(),
-          state.ordValue,
-          state.ascdescVal
+        makeTbodyArray(),
+        state.ordValue,
+        state.ascdescVal
       );
 
       // console.log("***AFTER sortedArrFirst***");
@@ -186,9 +186,9 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       // console.log("tbodyCommandTypes.ORDER_VALUE");
       // console.log(action.ascdesc);
       let sortedArr = sortJSON(
-          state.comVal,
-          action.payload.toLowerCase(),
-          action.ascdesc
+        state.comVal,
+        action.payload.toLowerCase(),
+        action.ascdesc
       );
       // console.log("tbodyCommandTypes.ORDER_VALUE");
       // console.log(action.ascdesc);
@@ -272,71 +272,71 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       };
 
     case tbodyCommandTypes.SUGG_VALUE:
-    function isNumeric(str) {
-      if (typeof str != "string") return false; // we only process strings!
-      return (
+      function isNumeric(str) {
+        if (typeof str != "string") return false; // we only process strings!
+        return (
           !isNaN(str) && !isNaN(parseFloat(str)) // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-      ); // ...and ensure strings of whitespace fail
-    }
+        ); // ...and ensure strings of whitespace fail
+      }
       let sugArr = [];
 
       let input = state.TSValue;
 
-    function compare(needToFind) {
-      // console.log(
-      //   "needToFind.split().length !!" +
-      //     needToFind.toString().split("").length
-      // );
-      if (needToFind !== 0) {
-        // console.log("needToFind" + needToFind);
+      function compare(needToFind) {
         // console.log(
-        //   "needToFind.split().length" +
-        //     needToFind.toString().split(" ").length
+        //   "needToFind.split().length !!" +
+        //     needToFind.toString().split("").length
         // );
-        if (isNumeric(needToFind)) {
-          action.payload.forEach(function (entry) {
-            let parses = entry.id;
-            let inside = "1001".includes(needToFind);
-            if (entry.id.toString().includes(needToFind)) {
-              sugArr.push(entry);
-            }
-          });
-        } else if (
+        if (needToFind !== 0) {
+          // console.log("needToFind" + needToFind);
+          // console.log(
+          //   "needToFind.split().length" +
+          //     needToFind.toString().split(" ").length
+          // );
+          if (isNumeric(needToFind)) {
+            action.payload.forEach(function (entry) {
+              let parses = entry.id;
+              let inside = "1001".includes(needToFind);
+              if (entry.id.toString().includes(needToFind)) {
+                sugArr.push(entry);
+              }
+            });
+          } else if (
             needToFind.toString().toLowerCase() === "home" ||
             needToFind.toString().toLowerCase() === "condo"
-        ) {
-          action.payload.forEach(function (entry) {
-            let parses = entry.type;
-            let inside = "home".includes(needToFind);
+          ) {
+            action.payload.forEach(function (entry) {
+              let parses = entry.type;
+              let inside = "home".includes(needToFind);
 
-            if (entry.type.toString().toLowerCase().includes(needToFind)) {
-              sugArr.push(entry);
-            }
-          });
-        } else {
-          action.payload.forEach(function (entry) {
-            let parses = entry.address;
-            // let inside = "Durwardton 74276 Windler Trafficway"
-            //     .toLowerCase()
-            //     .includes(needToFind.toLowerCase());
+              if (entry.type.toString().toLowerCase().includes(needToFind)) {
+                sugArr.push(entry);
+              }
+            });
+          } else {
+            action.payload.forEach(function (entry) {
+              let parses = entry.address;
+              // let inside = "Durwardton 74276 Windler Trafficway"
+              //     .toLowerCase()
+              //     .includes(needToFind.toLowerCase());
 
-            if (
+              if (
                 entry.address
-                    .toString()
-                    .toLowerCase()
-                    .includes(needToFind.toLowerCase())
-            ) {
-              sugArr.push(entry);
-            }
-          });
+                  .toString()
+                  .toLowerCase()
+                  .includes(needToFind.toLowerCase())
+              ) {
+                sugArr.push(entry);
+              }
+            });
+          }
+        }
+        if (sugArr.length > 0) {
+          return sugArr;
+        } else {
+          return 0;
         }
       }
-      if (sugArr.length > 0) {
-        return sugArr;
-      } else {
-        return 0;
-      }
-    }
 
       return {
         ...state,
@@ -358,71 +358,71 @@ const commandReducer = (state = INITIAL_STATE, action) => {
       };
 
     case tbodyCommandTypes.HINT_SUGG_VALUE:
-    function isNumeric2(str) {
-      if (typeof str != "string") return false; // we only process strings!
-      return (
+      function isNumeric2(str) {
+        if (typeof str != "string") return false; // we only process strings!
+        return (
           !isNaN(str) && !isNaN(parseFloat(str)) // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-      ); // ...and ensure strings of whitespace fail
-    }
+        ); // ...and ensure strings of whitespace fail
+      }
       let sugArr2 = [];
 
       let input2 = state.TSValue;
 
-    function compare2(needToFind2) {
-      // console.log(
-      //   "needToFind2.split().length !!" +
-      //     needToFind2.toString().split("").length
-      // );
-      if (needToFind2 !== 0) {
-        // console.log("needToFind2" + needToFind2);
+      function compare2(needToFind2) {
         // console.log(
-        //   "needToFind2.split().length" +
-        //     needToFind2.toString().split(" ").length
+        //   "needToFind2.split().length !!" +
+        //     needToFind2.toString().split("").length
         // );
-        if (isNumeric2(needToFind2)) {
-          action.payload.forEach(function (entry) {
-            let parses = entry.id;
-            let inside = "1001".includes(needToFind2);
-            if (entry.id.toString().includes(needToFind2)) {
-              sugArr2.push(entry);
-            }
-          });
-        } else if (
+        if (needToFind2 !== 0) {
+          // console.log("needToFind2" + needToFind2);
+          // console.log(
+          //   "needToFind2.split().length" +
+          //     needToFind2.toString().split(" ").length
+          // );
+          if (isNumeric2(needToFind2)) {
+            action.payload.forEach(function (entry) {
+              let parses = entry.id;
+              let inside = "1001".includes(needToFind2);
+              if (entry.id.toString().includes(needToFind2)) {
+                sugArr2.push(entry);
+              }
+            });
+          } else if (
             needToFind2.toString().toLowerCase() === "home" ||
             needToFind2.toString().toLowerCase() === "condo"
-        ) {
-          action.payload.forEach(function (entry) {
-            let parses = entry.type;
-            let inside = "home".includes(needToFind2);
+          ) {
+            action.payload.forEach(function (entry) {
+              let parses = entry.type;
+              let inside = "home".includes(needToFind2);
 
-            if (entry.type.toString().toLowerCase().includes(needToFind2)) {
-              sugArr2.push(entry);
-            }
-          });
-        } else {
-          action.payload.forEach(function (entry) {
-            let parses = entry.address;
-            // let inside = "Durwardton 74276 Windler Trafficway"
-            //     .toLowerCase()
-            //     .includes(needToFind.toLowerCase());
+              if (entry.type.toString().toLowerCase().includes(needToFind2)) {
+                sugArr2.push(entry);
+              }
+            });
+          } else {
+            action.payload.forEach(function (entry) {
+              let parses = entry.address;
+              // let inside = "Durwardton 74276 Windler Trafficway"
+              //     .toLowerCase()
+              //     .includes(needToFind.toLowerCase());
 
-            if (
+              if (
                 entry.address
-                    .toString()
-                    .toLowerCase()
-                    .includes(needToFind2.toLowerCase())
-            ) {
-              sugArr2.push(entry);
-            }
-          });
+                  .toString()
+                  .toLowerCase()
+                  .includes(needToFind2.toLowerCase())
+              ) {
+                sugArr2.push(entry);
+              }
+            });
+          }
+        }
+        if (sugArr2.length > 0) {
+          return sugArr2;
+        } else {
+          return 0;
         }
       }
-      if (sugArr2.length > 0) {
-        return sugArr2;
-      } else {
-        return 0;
-      }
-    }
 
       return {
         ...state,
